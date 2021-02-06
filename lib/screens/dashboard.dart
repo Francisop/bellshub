@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bellshub/widgets/custom_bottom_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -11,10 +12,12 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey[900],
+        elevation: 0,
         title: Text('BellsHub'),
         actions: [
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
-          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+          IconButton(icon: Icon(Icons.donut_small), onPressed: () {}),
         ],
       ),
       body: Column(
@@ -23,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
             child: Flexible(
                 child: ListView(children: [
               Material(
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
                     // TODO:add navigation animation
                     print('hello woorld froom public wall a');
@@ -47,7 +50,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                                 onPressed: () {},
                               )),
-                              SizedBox(height:12),
+                          SizedBox(height: 12),
                           Text('Public Wall',
                               style: TextStyle(
                                 color: Colors.blueGrey[200],
@@ -66,38 +69,78 @@ class _DashboardState extends State<Dashboard> {
                       BorderRadius.only(topLeft: Radius.circular(100)),
                   color: Colors.white,
                 ),
-              )
-            ])),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(52),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
                   children: [
-                    Container(
-                      child:
-                          IconButton(icon: Icon(Icons.home), onPressed: () {},color: Colors.blueGrey[200],),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 100,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text('F'),
+                              radius: 40,
+                            ),
+                            title: Text('Coleng Group'),
+                            subtitle: Text('Members:OsitaDinma,Amarachi,Iifeoluwa'),
+                          ),
+                        ),
+                      ),
                     ),
-                    Container(
-                      child: IconButton(
-                          icon: Icon(Icons.chat_bubble_outline_sharp),
-                          onPressed: () {},color: Colors.blueGrey[200],),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 100,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text('F'),
+                              radius: 40,
+                            ),
+                            title: Text('Coleng Group'),
+                            subtitle: Text('Members:OsitaDinma,Amarachi,Iifeoluwa'),
+                          ),
+                        ),
+                      ),
                     ),
-                    Container(
-                      child: IconButton(
-                          icon: Icon(Icons.rv_hookup), onPressed: () {},color: Colors.blueGrey[200],),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 100,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text('F'),
+                              radius: 40,
+                            ),
+                            title: Text('Coleng Group'),
+                            subtitle: Text('Members:OsitaDinma,Amarachi,Iifeoluwa'),
+                          ),
+                        ),
+                      ),
                     ),
+          
                   ],
                 ),
               ),
-            ),
-          )
+            ])),
+          ),
+          CustomBottomNavigationBar(),
         ],
       ),
     );
