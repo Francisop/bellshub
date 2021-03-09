@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bellshub/screens/dashboard.dart';
-import 'package:bellshub/screens/conversation.dart';
-import 'package:bellshub/screens/chat_rooms.dart';
+
+import 'screens/signup_steps/register_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Dashboard(),
+      home: RegisterScreen(),
     );
   }
 }
