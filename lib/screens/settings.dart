@@ -1,3 +1,4 @@
+import 'package:bellshub/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,9 +13,12 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
+        leading: IconButton(
+          icon : Icon(Icons.arrow_back_ios,
+          color: Colors.black,),
+          onPressed: (){
+            Navigator.pop(context);
+          },
         ),
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -48,9 +52,11 @@ class _SettingsState extends State<Settings> {
                 ),
                 ListTile(
                     leading: CircleAvatar(
+                      radius: 30,
                         backgroundColor: Colors.black,
                         child: Icon(
                           FontAwesomeIcons.userSecret,
+                          size: 30,
                         )),
                     title: Text('Go Anonymous'),
                     trailing: Switch(value: true, onChanged: (value) {})),
@@ -76,20 +82,20 @@ class _SettingsState extends State<Settings> {
                 child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                color: Colors.black,
                 height: 50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.copyright, color: Colors.white),
+                    Icon(Icons.copyright, color: Colors.grey[500]),
                     Text(
                       'Blaccop20Apps',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.grey[500]),
                     )
                   ],
                 ),
               ),
-            ))
+            )),
+            // CustomBottomNavigationBar()
           ],
         ),
       ),

@@ -1,16 +1,74 @@
-import 'package:flutter/gestures.dart';
+import 'package:bellshub/services/database_service.dart';
+import 'package:bellshub/utils/constants.dart';
+import 'package:bellshub/utils/shared_prefrence_util.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum DT { harder, smarter, selfStarter, tradingCharter }
 
-class Converstion extends StatefulWidget {
+class Conversation extends StatefulWidget {
+  var chatRoomId;
+  var name;
+  Conversation({this.chatRoomId, this.name});
   @override
-  _ConverstionState createState() => _ConverstionState();
+  _ConversationState createState() => _ConversationState();
 }
 
-class _ConverstionState extends State<Converstion> {
+class _ConversationState extends State<Conversation> {
   var _selection;
+  final _messageController = TextEditingController();
+  Stream chatMessageStream;
+  DatabaseService databaseService = new DatabaseService();
+
+  Widget chatMessageList() {
+    return StreamBuilder(
+        stream: chatMessageStream,
+        builder: (_, snapshot) {
+          if (snapshot.data == null) return Container();
+          return SizedBox(
+            height: 300,
+            child: ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (_, i) {
+                  return MessageTile(
+                    message: snapshot.data.docs[i].get('message'),
+                    isSendByMe: snapshot.data.docs[i].get('sendby') ==
+                        Constants.myMatric,
+                  );
+                }),
+          );
+        });
+  }
+
+  sendMessage() {
+    if (_messageController.text != "") {
+      Map<String, dynamic> messageMap = {
+        'message': _messageController.text,
+        "sendby": Constants.myMatric,
+        "time": DateTime.now().millisecondsSinceEpoch
+      };
+      databaseService.addConversationMessages(widget.chatRoomId, messageMap);
+      setState(() {
+        _messageController..text = "";
+      });
+    }
+  }
+
+  initMethod() async {
+    Constants.myMatric =
+        await SharedPrefrenceUtils.getUserMatricSharedPreference();
+    databaseService.getConversationMessages(widget.chatRoomId).then((val) {
+      setState(() {
+        chatMessageStream = val;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    initMethod();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +77,9 @@ class _ConverstionState extends State<Converstion> {
         elevation: 0.0,
         backgroundColor: Colors.white,
         title: Text(
-          'Madeline Duke',
+          '${widget.name}',
           style: TextStyle(color: Colors.grey.shade600, fontSize: 17),
+          overflow: TextOverflow.ellipsis,
         ),
         centerTitle: true,
         leading: Icon(
@@ -38,16 +97,12 @@ class _ConverstionState extends State<Converstion> {
       ),
       body: Container(
         child: Column(children: [
-          // Flexible(
-          //   child: ListView(
-          //     children: [
-          //       Container(
-          //         color: Colors.red,
-          //         height: 100,
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Container(
+            height: 600,
+            // width: MediaQuery.of(context).size.width,
+            child: chatMessageList(),
+            // padding: EdgeInsets.only(bottom: 50),
+          ),
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -69,6 +124,7 @@ class _ConverstionState extends State<Converstion> {
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.amber),
                           child: TextField(
+                            controller: _messageController,
                             style: TextStyle(fontSize: 15.0, height: 1.0),
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
@@ -88,7 +144,9 @@ class _ConverstionState extends State<Converstion> {
                         child: CircleAvatar(
                             child: IconButton(
                                 icon: Icon(Icons.send_rounded),
-                                onPressed: () {})),
+                                onPressed: () {
+                                  sendMessage();
+                                })),
                       ),
                     ),
                     Align(
@@ -130,6 +188,46 @@ class _ConverstionState extends State<Converstion> {
             ),
           )
         ]),
+      ),
+    );
+  }
+}
+
+class MessageTile extends StatelessWidget {
+  final String message;
+  final bool isSendByMe;
+  MessageTile({this.message, this.isSendByMe});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 300,
+      padding: EdgeInsets.only(
+        left: isSendByMe ? 0 : 24,
+        right: isSendByMe ? 24 : 0,
+      ),
+      // width: MediaQuery.of(context).size.width,
+      alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        margin: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: isSendByMe
+                    ? [Color(0xff007EF4), Color(0xff2A75BC)]
+                    : [Color(0x1AFFFFFF), Color(0x1AFFFFFF)]),
+            borderRadius: isSendByMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomLeft: Radius.circular(23))
+                : BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomRight: Radius.circular(23))),
+        child: Text(
+          message,
+          style: TextStyle(color: Colors.white, fontSize: 17.0),
+        ),
       ),
     );
   }

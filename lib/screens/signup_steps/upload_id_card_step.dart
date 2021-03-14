@@ -10,7 +10,7 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
   Widget build(BuildContext context) {
     return Scaffold(
           body: Container(
-        color: Colors.yellow,
+        color: Colors.white,
         child: Center(child: Text('upload id card'),),
         
       ),

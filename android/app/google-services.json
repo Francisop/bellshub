@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "375166605396",
+    "project_id": "bellshub",
+    "storage_bucket": "bellshub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375166605396:android:5f63292377bbb39558b5c1",
+        "android_client_info": {
+          "package_name": "com.bellshub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375166605396-pf8ggeam7dvmc0gbk425brnic1ggfkh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvb2AxYACVxFYiVKlYftX0CneUqwcFI2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375166605396-pf8ggeam7dvmc0gbk425brnic1ggfkh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

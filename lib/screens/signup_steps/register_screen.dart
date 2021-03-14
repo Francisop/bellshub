@@ -17,24 +17,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
       children: [
         Container(
           child: CarouselSlider(
-            items: [
-              BasicInfo(),
-              UploadIdCardStep()
-            ],
+            items: [BasicInfo(remote), UploadIdCardStep()],
             options: CarouselOptions(
-              disableCenter: true,
-              height: MediaQuery.of(context).size.height * 0.8,
-              viewportFraction: 10,
-              // pageSnapping: false,
-            ),
+                disableCenter: true,
+                height: MediaQuery.of(context).size.height,
+                viewportFraction: 1.0,
+                enableInfiniteScroll: false,
+                initialPage: 0,
+                reverse: false,
+                pageSnapping: false,
+                scrollPhysics: NeverScrollableScrollPhysics()),
             carouselController: remote,
           ),
         ),
-        ElevatedButton(
-          onPressed: () => remote.nextPage(
-              duration: Duration(milliseconds: 1000), curve: Curves.linear),
-          child: Text('→'),
-        )
+        // ElevatedButton(
+        //   onPressed: () => remote.nextPage(
+        //       duration: Duration(milliseconds: 1000), curve: Curves.linear),
+        //   child: Text('→'),
+        // )
       ],
     );
   }
