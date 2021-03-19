@@ -1,12 +1,10 @@
 import 'package:bellshub/screens/home.dart';
-import 'package:bellshub/screens/signup_steps/register_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/groups.dart';
-import 'screens/settings.dart';
+import 'screens/group/group_rooms.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: GroupRooms(),
     );
   }
 }

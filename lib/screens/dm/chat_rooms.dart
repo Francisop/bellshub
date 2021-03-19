@@ -1,7 +1,6 @@
+import 'package:bellshub/screens/dm/conversation.dart';
 import 'dart:async';
-
-import 'package:bellshub/screens/conversation.dart';
-import 'package:bellshub/screens/groups.dart';
+import 'package:bellshub/screens/group/group_rooms.dart';
 import 'package:bellshub/services/database_service.dart';
 import 'package:bellshub/utils/constants.dart';
 import 'package:bellshub/utils/shared_prefrence_util.dart';
@@ -21,6 +20,7 @@ class _ChatRoomsState extends State<ChatRooms> {
   QuerySnapshot searchSnapshot;
   bool isLoading = false;
   Stream chatRoomsStream;
+  Stream read;
 
   iniateSearch() {
     setState(() {
@@ -117,7 +117,7 @@ class _ChatRoomsState extends State<ChatRooms> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => Groups()));
+                            MaterialPageRoute(builder: (_) => GroupRooms()));
                       },
                       child: Container(
                           padding: EdgeInsets.all(13),
@@ -171,73 +171,6 @@ class _ChatRoomsState extends State<ChatRooms> {
         });
   }
 
-  createChatRoomAndStartConversation(String userMatric) {
-    if (userMatric != Constants.myMatric) {
-      print("this is constant name ${Constants.myMatric}");
-      String chatRoomId = getChatRoomId(userMatric, Constants.myMatric);
-      List<String> users = [userMatric, Constants.myMatric];
-      Map<String, dynamic> chatRoomMap = {
-        "users": users,
-        "chatroomId": chatRoomId
-      };
-      databaseService.createChatRoom(chatRoomId, chatRoomMap);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => Conversation(chatRoomId: chatRoomId)));
-    } else {
-      print("scaffold aint working");
-      SnackBar(
-        backgroundColor: Colors.white,
-        content: Text("hello"),
-      );
-    }
-  }
-
-  Widget searchList() {
-    return searchSnapshot != null
-        ? ListView.builder(
-            itemCount: searchSnapshot.docs.length,
-            shrinkWrap: true,
-            itemBuilder: (context, i) {
-              return searchTile(
-                searchSnapshot.docs[i].get('name'),
-                searchSnapshot.docs[i].get('email'),
-                searchSnapshot.docs[i].get('matric'),
-              );
-            },
-          )
-        : Center(
-            child: Container(
-              child: Text('No such user exists'),
-            ),
-          );
-  }
-
-  Widget searchTile(String userName, String userEmail, String userMatric) {
-    print(userName);
-    return ListTile(
-      leading: CircleAvatar(
-          radius: 30,
-          child: Icon(
-            FontAwesomeIcons.user,
-            size: 30,
-          )),
-      title: Text(
-        userName,
-        style: TextStyle(color: Colors.black),
-      ),
-      trailing: MaterialButton(
-        color: Colors.blue,
-        onPressed: () {
-          Navigator.pop(context);
-          createChatRoomAndStartConversation(userMatric);
-        },
-        child: Text('message'),
-      ),
-    );
-  }
-
   // Concerning the chat rooms
   Widget chatRoomList() {
     return StreamBuilder(
@@ -265,8 +198,10 @@ class _ChatRoomsState extends State<ChatRooms> {
                       .toString()
                       .split('_');
                   return ChatRoomsTile(
-                      userName: name[0],
-                      roomId: snapshot.data.docs[i].get('chatroomId'));
+                    userName: name[0],
+                    roomId: snapshot.data.docs[i].get('chatroomId'),
+                  );
+                  // read: snapshot.data.docs[i].get('chatroomId'));
                 }),
           );
         });
@@ -281,52 +216,115 @@ class _ChatRoomsState extends State<ChatRooms> {
       });
     });
   }
-
-  getChatRoomId(String a, b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
-    }
-  }
 }
 
-class ChatRoomsTile extends StatelessWidget {
+class ChatRoomsTile extends StatefulWidget {
   final String userName;
   final String roomId;
   ChatRoomsTile({this.userName, this.roomId});
+
+  @override
+  _ChatRoomsTileState createState() => _ChatRoomsTileState();
+}
+
+class _ChatRoomsTileState extends State<ChatRoomsTile> {
+  DatabaseService databaseService = DatabaseService();
+  Stream read;
+  Stream lastChat;
+
+  checkRead() async {
+    try {
+      Constants.myMatric =
+          await SharedPrefrenceUtils.getUserMatricSharedPreference();
+      read = await databaseService.getUnreadConversations(
+          widget.roomId, Constants.myMatric);
+    } catch (e) {
+      print('check read error $e');
+    }
+
+    // for (var data in read.data.docs) {
+    //   print('this is the datas count');
+    //   print(data.length);    }
+  }
+
+  getLastChat() {
+    databaseService.getLastMessageSent(widget.roomId).then((val) {
+      setState(() {
+        lastChat = val;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // getLastChat();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return userName != ""
+    return widget.userName != ""
         ? Container(
             child: ListTile(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) =>
-                            Conversation(chatRoomId: roomId, name: userName)));
+                        builder: (_) => Conversation(
+                            chatRoomId: widget.roomId, name: widget.userName)));
               },
               title: Text(
-                userName,
+                widget.userName,
                 style: simpleTextStyle(),
               ),
+              subtitle: StreamBuilder(
+                  stream: databaseService.getLastMessageSent(widget.roomId),
+                  builder: (context, snapshot) {
+                    return (snapshot.data != null)
+                        ? Text(
+                            (snapshot.data.docs[0].get('sendby') ==
+                                    Constants.myMatric)
+                                ? 'you: ${snapshot.data.docs[0].get('message')}'
+                                : '${snapshot.data.docs[0].get('message')}',
+                            style: TextStyle(color: Colors.grey.shade400,fontSize: 15),
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : SizedBox.shrink();
+                  }),
+              trailing: SizedBox(
+                height: 30,
+                width: 30,
+                child: StreamBuilder(
+                    stream: databaseService.getUnreadConversations(
+                        widget.roomId, Constants.myMatric),
+                    builder: (_, snapshot) {
+                      if (snapshot.data == null) return Container();
+                      return (snapshot.data != null &&
+                              snapshot.data.docs.length > 0)
+                          ? CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.indigo.shade200,
+                              child: Text("${snapshot.data.docs.length}"))
+                          : Container();
+                    }),
+              ),
               leading: CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Color(0xff007EF4),
+                  radius: 24,
+                  backgroundColor: Colors.indigo.shade900,
                   child: Text(
-                    userName.substring(0, 1).toUpperCase(),
+                    widget.userName.substring(0, 1).toUpperCase(),
                     style: mediumTextStyle(),
                   )),
             ),
           )
         : Center(
-            child: Text("No Chas yet", style: TextStyle(color: Colors.indigo)));
+            child: Text("No Chats yet",
+                style: TextStyle(color: Colors.grey.shade300)));
   }
 }
 
 class MyBottomSheet extends StatefulWidget {
-  var searchSnapshot;
+  final QuerySnapshot searchSnapshot;
   MyBottomSheet(this.searchSnapshot);
   @override
   _MyBottomSheetState createState() => _MyBottomSheetState();
@@ -404,7 +402,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
   }
 
   createChatRoomAndStartConversation(String userMatric, String fullname) {
-    if (userMatric != Constants.myMatric) {
+    if (userMatric == Constants.myMatric) {
       print("this is constant name ${Constants.myMatric}");
       String chatRoomId = getChatRoomId(fullname, Constants.myName);
       List<String> users = [userMatric, Constants.myMatric];

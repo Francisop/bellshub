@@ -7,24 +7,24 @@ class SharedPrefrenceUtils {
   static String sharedPreferenceUserMatricKey = "USERMATRICKEY";
 
   //saving data to shared Preference
-  static Future<void> saveUserLoggedInSharedPreference(
+  static Future<bool> saveUserLoggedInSharedPreference(
       bool isUserLoggedIn) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setBool(sharedPreferenceUserLoggedInKey, isUserLoggedIn);
   }
 
-  static Future<void> saveUserNameSharedPreference(String userName) async {
+  static Future saveUserNameSharedPreference(String userName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(sharedPreferenceUserNameKey, userName);
   }
 
-  static Future<void> saveUserEmailSharedPreference(String userEmail) async {
+  static Future saveUserEmailSharedPreference(String userEmail) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(sharedPreferenceUserNameKey, userEmail);
   }
 
   
-  static Future<void> saveUserMatricSharedPreference(String userMatric) async {
+  static Future saveUserMatricSharedPreference(String userMatric) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(sharedPreferenceUserMatricKey, userMatric);
   }

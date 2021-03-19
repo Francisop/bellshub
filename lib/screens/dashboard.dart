@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bellshub/widgets/custom_bottom_navigation_bar.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -140,7 +139,6 @@ class _DashboardState extends State<Dashboard> {
               ),
             ])),
           ),
-          CustomBottomNavigationBar(),
         ],
       ),
     );

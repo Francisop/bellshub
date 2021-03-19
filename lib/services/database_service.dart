@@ -5,7 +5,7 @@ class DatabaseService {
   getUserByUsername(String username) async {
     return await _firestore
         .collection('users')
-        .where("fullname",isEqualTo:username)
+        .where("fullname", isEqualTo: username)
         .get();
   }
 
@@ -58,6 +58,80 @@ class DatabaseService {
     return _firestore
         .collection("ChatRoom")
         .where("users", arrayContains: userMatric)
+        .snapshots();
+  }
+
+  getUnreadConversations(chatRoomId, myMatric) {
+    try {
+      return _firestore
+          .collection("ChatRoom")
+          .doc(chatRoomId)
+          .collection('chats')
+          .where('read', isEqualTo: false)
+          // .where('sendby', isNotEqualTo: myMatric)
+          .snapshots();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  setReadConversation(chatRoomId) {
+    return _firestore
+        .collection('ChatRoom')
+        .doc(chatRoomId)
+        .collection('chat')
+        .doc()
+        .update({'read': true});
+  }
+
+  getLastMessageSent(chatRoomId) {
+    try {
+      return _firestore
+          .collection("ChatRoom")
+          .doc(chatRoomId)
+          .collection('chats')
+          .orderBy('time', descending: true)
+          .limit(1)
+          .snapshots();
+    } catch (e) {
+      print('last message sent error $e');
+    }
+  }
+
+//////////////////GROUPS////////////////////
+  getPermanentGroups() {
+    try {
+      return _firestore
+          .collection('users')
+          .doc('q8gt6W4J7FOnihhE4bU7')
+          .collection('groups')
+          .snapshots();
+    } catch (e) {
+      print('getpermentgroups error $e');
+    }
+  }
+
+  addGroupConversationMessages(String groupRoomId, messageMap) {
+    _firestore
+        .collection('users')
+        .doc('q8gt6W4J7FOnihhE4bU7')
+        .collection('groups')
+        .doc(groupRoomId)
+        .collection('chats')
+        .add(messageMap)
+        .catchError((e) {
+      print("getConversationMessages error $e");
+    });
+  }
+
+  getGroupConversationMessages(String groupRoomId) async {
+    return _firestore
+        .collection('users')
+        .doc('q8gt6W4J7FOnihhE4bU7')
+        .collection('groups')
+        .doc(groupRoomId)
+        .collection('chats')
+        .orderBy('time')
         .snapshots();
   }
 }

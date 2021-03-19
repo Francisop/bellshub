@@ -174,7 +174,7 @@ class _BasicInfoState extends State<BasicInfo> {
                           height: 60,
                           // width: 200,
                           padding: EdgeInsets.all(20),
-                          color: (male != true) ? Colors.amber : Colors.white,
+                          color: (male = true) ? Colors.amber : Colors.white,
                         ),
                       ),
                     ]),
@@ -202,6 +202,7 @@ class _BasicInfoState extends State<BasicInfo> {
                         Map<String, dynamic> userMap = {
                           'fullname': _fullNameController.text,
                           'email': _emailController.text,
+                          'approved':false,
                           'matric': _matricNoController.text,
                           'date_created': DateTime.now().millisecondsSinceEpoch,
                           'gender': (male == true) ? 'Male' : 'Female',

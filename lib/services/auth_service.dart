@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-    // parse the user to my currentUser model
+  // parse the user to my currentUser model
   CurrentUser _userFromFirebaseUser(User user) {
     return user != null ? CurrentUser(userId: user.uid) : null;
   }
