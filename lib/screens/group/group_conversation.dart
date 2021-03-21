@@ -57,6 +57,33 @@ class _GroupConversationState extends State<GroupConversation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        title: Text(
+          '${widget.name}',
+          style: TextStyle(color: Colors.grey.shade600, fontSize: 17),
+          overflow: TextOverflow.ellipsis,
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.grey.shade600,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          CircleAvatar(
+              backgroundColor: Colors.indigo.shade400,
+              child: Icon(Icons.group)),
+          SizedBox(
+            width: 10,
+          ),
+        ],
+      ),
       backgroundColor: Colors.indigo,
       body: SafeArea(
         child: Container(

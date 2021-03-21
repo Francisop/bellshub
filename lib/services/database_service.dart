@@ -98,7 +98,10 @@ class DatabaseService {
     }
   }
 
-//////////////////GROUPS////////////////////
+///////////////////////////////////////////
+  ///GROUPS
+//////////////////////////////////////////
+
   getPermanentGroups() {
     try {
       return _firestore
@@ -133,5 +136,45 @@ class DatabaseService {
         .collection('chats')
         .orderBy('time')
         .snapshots();
+  }
+
+  getLastGroupMessageSent(groupRoomId) {
+    try {
+      return _firestore
+          .collection('users')
+          .doc('q8gt6W4J7FOnihhE4bU7')
+          .collection('groups')
+          .doc(groupRoomId)
+          .collection('chats')
+          .orderBy('time', descending: true)
+          .limit(1)
+          .snapshots();
+    } catch (e) {
+      print('last message sent error $e');
+    }
+  }
+
+  getUnreadGroupConversations(groupRoomId, myMatric) {
+    try {
+      return _firestore
+          .collection('users')
+          .doc('q8gt6W4J7FOnihhE4bU7')
+          .collection('groups')
+          .doc(groupRoomId)
+          .collection('chats')
+          .where('read', isEqualTo: false)
+          .where('sendby', isNotEqualTo: myMatric)
+          .snapshots();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  createGroup(groupMap) {
+    try {
+      _firestore.collection('users').doc().collection('groups').add(groupMap);
+    } catch (e) {
+      print('uploaduserinfo exception $e');
+    }
   }
 }

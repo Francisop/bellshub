@@ -5,7 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class BasicInfo extends StatefulWidget {
-  CarouselController remote;
+  final CarouselController remote;
   BasicInfo(this.remote);
   @override
   _BasicInfoState createState() => _BasicInfoState();

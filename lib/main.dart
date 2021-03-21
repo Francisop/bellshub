@@ -1,4 +1,6 @@
 import 'package:bellshub/screens/home.dart';
+import 'package:bellshub/screens/signup_steps/register_screen.dart';
+import 'package:bellshub/screens/signup_steps/upload_id_card_step.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: GroupRooms(),
+      home: Home(),
     );
   }
 }

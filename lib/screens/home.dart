@@ -1,6 +1,7 @@
 import 'package:bellshub/screens/settings.dart';
-import 'package:bellshub/screens/signup_steps/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:bellshub/screens/qrcode.dart';
+import 'package:bellshub/screens/hookup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'dm/chat_rooms.dart';
@@ -14,8 +15,8 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final pages = [
     ChatRooms(),
-    RegisterScreen(),
-    RegisterScreen(),
+    Hookup(),
+    QrCode(),
     Settings(),
   ];
 
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            label: 'home',  
+            label: 'home',
             icon: Icon(
               Icons.dashboard,
               color: (_currentIndex == 0) ? Colors.indigo : Colors.grey[600],
@@ -44,22 +45,19 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             label: 'hookup',
             icon: FaIcon(FontAwesomeIcons.kissWinkHeart,
-                color:
-                    (_currentIndex == 1) ? Colors.indigo : Colors.grey[600],
+                color: (_currentIndex == 1) ? Colors.indigo : Colors.grey[600],
                 size: 25),
           ),
           BottomNavigationBarItem(
             label: 'Qrcode',
             icon: FaIcon(FontAwesomeIcons.qrcode,
-                color:
-                    (_currentIndex == 2) ? Colors.indigo : Colors.grey[600],
+                color: (_currentIndex == 2) ? Colors.indigo : Colors.grey[600],
                 size: 25),
           ),
           BottomNavigationBarItem(
             label: 'settings',
             icon: FaIcon(Icons.settings,
-                color:
-                    (_currentIndex == 3) ? Colors.indigo : Colors.grey[600],
+                color: (_currentIndex == 3) ? Colors.indigo : Colors.grey[600],
                 size: 25),
           )
         ],

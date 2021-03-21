@@ -1,5 +1,7 @@
-import 'package:bellshub/screens/dm/conversation.dart';
+import 'package:bellshub/screens/group/create_groups.dart/create_group.dart';
 import 'package:bellshub/services/database_service.dart';
+import 'package:bellshub/utils/constants.dart';
+import 'package:bellshub/utils/shared_prefrence_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +16,14 @@ class _GroupRoomsState extends State<GroupRooms> {
   DatabaseService databaseService = DatabaseService();
   Stream permanentGroups;
 
-  initMethod() {
-    databaseService.getPermanentGroups().then((value) {
-      setState(() {
-        permanentGroups = value;
-      });
-    });
+  initMethod() async {
+    Constants.myMatric =
+        await SharedPrefrenceUtils.getUserMatricSharedPreference();
   }
 
   @override
   void initState() {
-    // initMethod();
+    initMethod();
     // TODO: implement initState
     super.initState();
   }
@@ -33,7 +32,10 @@ class _GroupRoomsState extends State<GroupRooms> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => CreateGroup()));
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.indigo[600],
       ),
@@ -84,7 +86,18 @@ class _GroupRoomsState extends State<GroupRooms> {
                   itemBuilder: (_, int i) {
                     return ListTile(
                       title: Text('${snapshot.data.docs[i].get('name')}'),
-                      subtitle: Text('last message sent in group'),
+                      subtitle: StreamBuilder(
+                          stream: databaseService.getLastGroupMessageSent(
+                              snapshot.data.docs[i].id),
+                          builder: (context, snapshotAsync) {
+                            if (snapshotAsync.data == null) return Container();
+                            return Text(
+                              '${snapshotAsync.data.docs[0].get('username')}' +
+                                  ': ${snapshotAsync.data.docs[0].get('message')}',
+                              style: TextStyle(),
+                              overflow: TextOverflow.ellipsis,
+                            );
+                          }),
                       leading: CircleAvatar(
                         backgroundColor: Colors.indigo,
                         radius: 30,
@@ -101,10 +114,32 @@ class _GroupRoomsState extends State<GroupRooms> {
                                     '${snapshot.data.docs[i].id}',
                                     '${snapshot.data.docs[i].get('name')}')));
                       },
-                      trailing: CircleAvatar(
-                        radius: 16,
-                        backgroundColor: Colors.grey.shade300,
-                        child: Text('123'),
+                      trailing: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc('q8gt6W4J7FOnihhE4bU7')
+                                .collection('groups')
+                                .doc(snapshot.data.docs[i].id)
+                                .collection('chats')
+                                .where('sendby',
+                                    isNotEqualTo: Constants.myMatric)
+                                .where('read', isEqualTo: false)
+                                .snapshots(),
+                            builder: (context, snapshotBsync) {
+                              if (snapshotBsync.data == null)
+                                return SizedBox.shrink();
+                              if (snapshotBsync.data.docs.length == 0)
+                                return SizedBox.shrink();
+                              return CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Colors.grey.shade300,
+                                child:
+                                    Text('${snapshotBsync.data.docs.length}'),
+                              );
+                            }),
                       ),
                     );
                     // Container(
@@ -112,62 +147,12 @@ class _GroupRoomsState extends State<GroupRooms> {
                     // );
                   },
                   separatorBuilder: (BuildContext context, int index) {
-                    return Divider();
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Divider(),
+                    );
                   },
                 ),
-
-                // ListView(children: [
-                //   ListTile(
-                //     onTap: () {
-                //       // Navigator.push(
-                //       //     context, MaterialPageRoute(builder: (_) => Converstion()));
-                //     },
-                //     title: Text('Public Wall'),
-                //     subtitle: Text(
-                //       'Tope: Hello francis hoow are you today, my love i cant wait to see you',
-                //       overflow: TextOverflow.ellipsis,
-                //     ),
-                //     leading: CircleAvatar(
-                //       backgroundColor: Colors.indigo,
-                //       radius: 30,
-                //       child: Icon(
-                //         Icons.group,
-                //         size: 30,
-                //       ),
-                //     ),
-                //     trailing: CircleAvatar(
-                //       radius: 16,
-                //       backgroundColor: Colors.grey.shade300,
-                //       child: Text('123'),
-                //     ),
-                //   ),
-                //   Divider(),
-                //   ListTile(
-                //     onTap: () {
-                //       // Navigator.push(
-                //       //     context, MaterialPageRoute(builder: (_) => Converstion()));
-                //     },
-                //     title: Text('College Of Engineering'),
-                //     subtitle: Text(
-                //       'Tope: Hello francis hoow are you today, my love i cant wait to see you',
-                //       overflow: TextOverflow.ellipsis,
-                //     ),
-                //     leading: CircleAvatar(
-                //       backgroundColor: Colors.indigo,
-                //       radius: 30,
-                //       child: Icon(
-                //         Icons.group,
-                //         size: 30,
-                //       ),
-                //     ),
-                //     trailing: CircleAvatar(
-                //       radius: 16,
-                //       backgroundColor: Colors.grey.shade300,
-                //       child: Text('123'),
-                //     ),
-                //   ),
-                //   Divider(),
-                // ]),
               );
             }),
         ///////////////////////////
