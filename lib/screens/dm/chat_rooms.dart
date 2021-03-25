@@ -31,7 +31,7 @@ class _ChatRoomsState extends State<ChatRooms> {
       setState(() {
         searchSnapshot = val;
       });
-      // Navigator.push(context,MaterialPageRoute(builder: (_) => MyBottomSheet(searchSnapshot)));
+      // Navigator.push(context,MaterialPageRoute(builder: (_) => SearchResultBottomSheet(searchSnapshot)));
     });
   }
 
@@ -55,7 +55,7 @@ class _ChatRoomsState extends State<ChatRooms> {
                   icon: Icon(
                     Icons.notifications,
                     size: 30,
-                    color: Colors.amber[900],
+                    color: Colors.pink
                   ),
                   onPressed: () {},
                 ),
@@ -74,45 +74,53 @@ class _ChatRoomsState extends State<ChatRooms> {
               child: Container(
                 // padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _searchController.text = '';
-                          });
-                          iniateSearch();
-                          Timer timer = Timer(new Duration(seconds: 5), () {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            searcchResult();
-                          });
-                        },
-                        icon: Icon(Icons.search),
-                      ),
-                    ),
                     Container(
-                      padding: EdgeInsets.all(12),
-                      height: 70.0,
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: TextFormField(
-                          controller: _searchController,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(height: 1.0),
-                          decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                      BorderSide(color: Colors.indigo.shade50)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide:
-                                      BorderSide(color: Colors.indigo.shade50)),
-                              hintText: 'Search...',
-                              fillColor: Colors.grey.shade100,
-                              filled: true)),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.pink,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _searchController.text = '';
+                                });
+                                iniateSearch();
+                                Timer timer =
+                                    Timer(new Duration(seconds: 5), () {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                  searcchResult();
+                                });
+                              },
+                              icon: Icon(Icons.search),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(12),
+                            height: 70.0,
+                            width: MediaQuery.of(context).size.width * 0.65,
+                            child: TextFormField(
+                                controller: _searchController,
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(height: 1.0),
+                                decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                            color: Colors.indigo.shade50)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                            color: Colors.indigo.shade50)),
+                                    hintText: 'Search...',
+                                    fillColor: Colors.grey.shade100,
+                                    filled: true)),
+                          ),  
+                        ],
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -167,7 +175,7 @@ class _ChatRoomsState extends State<ChatRooms> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return MyBottomSheet(searchSnapshot);
+          return SearchResultBottomSheet(searchSnapshot);
         });
   }
 
@@ -286,7 +294,8 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
                                     Constants.myMatric)
                                 ? 'you: ${snapshot.data.docs[0].get('message')}'
                                 : '${snapshot.data.docs[0].get('message')}',
-                            style: TextStyle(color: Colors.grey.shade400,fontSize: 15),
+                            style: TextStyle(
+                                color: Colors.grey.shade400, fontSize: 15),
                             overflow: TextOverflow.ellipsis,
                           )
                         : SizedBox.shrink();
@@ -323,14 +332,15 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
   }
 }
 
-class MyBottomSheet extends StatefulWidget {
+class SearchResultBottomSheet extends StatefulWidget {
   final QuerySnapshot searchSnapshot;
-  MyBottomSheet(this.searchSnapshot);
+  SearchResultBottomSheet(this.searchSnapshot);
   @override
-  _MyBottomSheetState createState() => _MyBottomSheetState();
+  _SearchResultBottomSheetState createState() =>
+      _SearchResultBottomSheetState();
 }
 
-class _MyBottomSheetState extends State<MyBottomSheet> {
+class _SearchResultBottomSheetState extends State<SearchResultBottomSheet> {
   DatabaseService databaseService = DatabaseService();
 
   initMethod() async {
@@ -346,7 +356,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
   @override
   Widget build(BuildContext context) {
     // print(widget.searchSnapshot.docs);
-    return widget.searchSnapshot != []
+    return (widget.searchSnapshot.docs != [])
         ? Container(
             height: 999,
             decoration: BoxDecoration(

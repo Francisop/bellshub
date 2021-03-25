@@ -5,6 +5,7 @@ class SharedPrefrenceUtils {
   static String sharedPreferenceUserNameKey = "USERNAMEKEY";
   static String sharedPreferenceUserEmailKey = "USEREMAILKEY";
   static String sharedPreferenceUserMatricKey = "USERMATRICKEY";
+  static String sharedPreferenceUserVerifiedKey = "USERVERIFIEDKEY";
 
   //saving data to shared Preference
   static Future<bool> saveUserLoggedInSharedPreference(
@@ -20,18 +21,20 @@ class SharedPrefrenceUtils {
 
   static Future saveUserEmailSharedPreference(String userEmail) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.setString(sharedPreferenceUserNameKey, userEmail);
+    return await prefs.setString(sharedPreferenceUserEmailKey, userEmail);
   }
 
-  
   static Future saveUserMatricSharedPreference(String userMatric) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(sharedPreferenceUserMatricKey, userMatric);
   }
 
-
-
-
+  static Future saveUserVerifiedSharedPreference(
+      String userVerification) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.setString(
+        sharedPreferenceUserVerifiedKey, userVerification);
+  }
 
   //get data from  sharedPreference
 
@@ -47,12 +50,16 @@ class SharedPrefrenceUtils {
 
   static Future<String> getUserEmailSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString(sharedPreferenceUserNameKey);
+    return await prefs.getString(sharedPreferenceUserEmailKey);
   }
-
 
   static Future<String> getUserMatricSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.getString(sharedPreferenceUserMatricKey);
+  }
+
+  static Future<String> getUserVerifiedSharedPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.getString(sharedPreferenceUserVerifiedKey);
   }
 }

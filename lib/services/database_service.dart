@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class DatabaseService {
   final _firestore = FirebaseFirestore.instance;
+
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
   getUserByUsername(String username) async {
     return await _firestore
         .collection('users')
@@ -61,14 +68,14 @@ class DatabaseService {
         .snapshots();
   }
 
-  getUnreadConversations(chatRoomId, myMatric) {
+  getUnreadConversations(chatRoomId, myMatric) async {
     try {
       return _firestore
           .collection("ChatRoom")
           .doc(chatRoomId)
           .collection('chats')
           .where('read', isEqualTo: false)
-          // .where('sendby', isNotEqualTo: myMatric)
+          .where('sendby', isNotEqualTo: myMatric)
           .snapshots();
     } catch (e) {
       print(e);
@@ -175,6 +182,38 @@ class DatabaseService {
       _firestore.collection('users').doc().collection('groups').add(groupMap);
     } catch (e) {
       print('uploaduserinfo exception $e');
+    }
+  }
+
+  setGroupReadConversation(groupRoomId, chatid) {
+    return _firestore
+        .collection('users')
+        .doc('q8gt6W4J7FOnihhE4bU7')
+        .collection('groups')
+        .doc(groupRoomId)
+        .collection('chats')
+        .doc(chatid)
+        .update({'read': true});
+  }
+
+  //////////////////////////////////
+  ///image upload
+  uploadIdCard(File file) {
+    try {
+      return storage.ref().child('imageFolder/').putFile(file).snapshot;
+    } catch (e) {
+      print('uploadIdCard Error $e');
+    }
+  }
+
+  updateIdCardUrl(id, downloadUrl) {
+    try {
+      return _firestore
+          .collection('users')
+          .doc(id)
+          .update({'studentidimageurl': downloadUrl});
+    } catch (e) {
+      print('updateIdCardUrl error $e');
     }
   }
 }

@@ -31,6 +31,20 @@ class _GroupRoomsState extends State<GroupRooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.indigo[600],
+        title: Text(
+          'Groups',
+          style: TextStyle(color: Colors.white, fontSize: 15),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -41,35 +55,6 @@ class _GroupRoomsState extends State<GroupRooms> {
       ),
       body: Container(
           child: Column(children: [
-        Container(
-            height: 130,
-            decoration: BoxDecoration(
-              color: Colors.indigo[600],
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: ListTile(
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                title: Text(
-                  'Group-chats',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                subtitle: Text(
-                  'Everything group chats both personal and concerning bells',
-                  style: TextStyle(color: Colors.white, fontSize: 13),
-                ),
-              ),
-            )),
-
         ////////////////////////////////////
         StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -124,9 +109,9 @@ class _GroupRoomsState extends State<GroupRooms> {
                                 .collection('groups')
                                 .doc(snapshot.data.docs[i].id)
                                 .collection('chats')
+                                .where('read', isEqualTo: false)
                                 .where('sendby',
                                     isNotEqualTo: Constants.myMatric)
-                                .where('read', isEqualTo: false)
                                 .snapshots(),
                             builder: (context, snapshotBsync) {
                               if (snapshotBsync.data == null)

@@ -93,10 +93,10 @@ class _ConversationState extends State<Conversation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[900],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.indigo[900],
         title: Text(
           '${widget.name}',
           style: TextStyle(color: Colors.grey.shade600, fontSize: 17),

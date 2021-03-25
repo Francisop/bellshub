@@ -17,27 +17,33 @@ class GroupConversation extends StatefulWidget {
 }
 
 class _GroupConversationState extends State<GroupConversation> {
-  var _selection;
   final _messageController = TextEditingController();
   Stream chatMessageStream;
-  DatabaseService databaseService = new DatabaseService();
+  DatabaseService databaseService = DatabaseService();
   ScrollController _scrollController = new ScrollController();
+  var value;
 
   initMethod() async {
     Constants.myMatric =
         await SharedPrefrenceUtils.getUserMatricSharedPreference();
     Constants.myName = await SharedPrefrenceUtils.getUserNameSharedPreference();
-    databaseService
+    await databaseService
         .getGroupConversationMessages(widget.groupRoomId)
         .then((val) {
       setState(() {
         chatMessageStream = val;
       });
     });
-    databaseService
-        .getUnreadConversations(widget.groupRoomId, Constants.myMatric)
-        .then((val) {
-      print(val.data.docs);
+
+    int i = 0;
+    await databaseService
+        .getUnreadGroupConversations(widget.groupRoomId, Constants.myMatric)
+        .forEach((e) {
+      for (i = 0; i < e.docs.length; i++) {
+        // print();
+        databaseService.setGroupReadConversation(
+            widget.groupRoomId, e.docs[i].id);
+      }
     });
   }
 
@@ -59,17 +65,17 @@ class _GroupConversationState extends State<GroupConversation> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.indigo[900],
         title: Text(
           '${widget.name}',
-          style: TextStyle(color: Colors.grey.shade600, fontSize: 17),
+          style: TextStyle(color: Colors.white, fontSize: 17),
           overflow: TextOverflow.ellipsis,
         ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.grey.shade600,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -84,7 +90,7 @@ class _GroupConversationState extends State<GroupConversation> {
           ),
         ],
       ),
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.indigo.shade50,
       body: SafeArea(
         child: Container(
           child: Stack(children: [
@@ -100,7 +106,7 @@ class _GroupConversationState extends State<GroupConversation> {
                 padding: EdgeInsets.all(10),
                 height: 100,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.grey.shade50,
+                color: Colors.indigo.shade50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -112,7 +118,7 @@ class _GroupConversationState extends State<GroupConversation> {
                           // height: 60,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: Colors.indigo.shade50),
+                              color: Colors.white),
                           child: TextField(
                             onTap: () {
                               Timer(
@@ -277,13 +283,13 @@ class MessageTile extends StatelessWidget {
       // width: MediaQuery.of(context).size.width,
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         margin: EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: isSendByMe
-                    ? [Colors.indigo.shade400, Colors.indigo.shade900]
-                    : [Colors.blueGrey.shade900, Colors.indigo.shade900]),
+                    ? [Colors.indigo.shade900, Colors.indigo.shade900]
+                    : [Colors.white, Colors.white]),
             borderRadius: isSendByMe
                 ? BorderRadius.only(
                     topLeft: Radius.circular(23),
@@ -294,17 +300,23 @@ class MessageTile extends StatelessWidget {
                     topRight: Radius.circular(23),
                     bottomRight: Radius.circular(23))),
         child: Column(
+          crossAxisAlignment:
+              (isSendByMe) ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            Text(
-              username,
-              style: TextStyle(color: color),
-            ),
+            (isSendByMe)
+                ? SizedBox.shrink()
+                : Text(
+                    username,
+                    style: TextStyle(color: color, fontSize: 13),
+                  ),
             SizedBox(
               height: 3,
             ),
             Text(
               message,
-              style: TextStyle(color: Colors.white, fontSize: 17.0),
+              style: TextStyle(
+                  color: (isSendByMe) ? Colors.white : Colors.black,
+                  fontSize: 17.0),
             ),
           ],
         ),

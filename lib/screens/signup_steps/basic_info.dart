@@ -2,6 +2,7 @@ import 'package:bellshub/services/auth_service.dart';
 import 'package:bellshub/services/database_service.dart';
 import 'package:bellshub/utils/shared_prefrence_util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class BasicInfo extends StatefulWidget {
@@ -174,7 +175,7 @@ class _BasicInfoState extends State<BasicInfo> {
                           height: 60,
                           // width: 200,
                           padding: EdgeInsets.all(20),
-                          color: (male = true) ? Colors.amber : Colors.white,
+                          color: (male != true) ? Colors.amber : Colors.white,
                         ),
                       ),
                     ]),
@@ -202,14 +203,15 @@ class _BasicInfoState extends State<BasicInfo> {
                         Map<String, dynamic> userMap = {
                           'fullname': _fullNameController.text,
                           'email': _emailController.text,
-                          'approved':false,
+                          'approved': false,
                           'matric': _matricNoController.text,
                           'date_created': DateTime.now().millisecondsSinceEpoch,
                           'gender': (male == true) ? 'Male' : 'Female',
+                          'studentidimageurl': ''
                         };
 
                         //SharedPreference
-                         databaseService.uploadUserInfo(userMap);
+                        databaseService.uploadUserInfo(userMap);
                         await SharedPrefrenceUtils
                             .saveUserEmailSharedPreference(
                                 _emailController.text);
@@ -220,13 +222,15 @@ class _BasicInfoState extends State<BasicInfo> {
                         await SharedPrefrenceUtils
                             .saveUserMatricSharedPreference(
                                 _matricNoController.text);
+                        ////////////////////////////////////////
+                        FocusScope.of(context).requestFocus(FocusNode());
                         //////////////////////////////////
                         widget.remote.nextPage(
                             duration: Duration(milliseconds: 1000),
                             curve: Curves.easeIn);
-                        setState(() {
-                          _loading = false;
-                        });
+                        // setState(() {
+                        //   _loading = false;
+                        // });
                       }
                     },
                     icon: Icon(
