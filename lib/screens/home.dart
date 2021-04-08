@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final pages = [
     ChatRooms(),
-    Hookup(),
     QrCode(),
     Settings(),
   ];
@@ -42,22 +41,22 @@ class _HomeState extends State<Home> {
               size: 25,
             ),
           ),
-          BottomNavigationBarItem(
-            label: 'hookup',
-            icon: FaIcon(FontAwesomeIcons.kissWinkHeart,
-                color: (_currentIndex == 1) ? Colors.indigo : Colors.grey[600],
-                size: 25),
-          ),
+          // BottomNavigationBarItem(
+          //   label: 'hookup',
+          //   icon: FaIcon(FontAwesomeIcons.kissWinkHeart,
+          //       color: (_currentIndex == 1) ? Colors.indigo : Colors.grey[600],
+          //       size: 25),
+          // ),
           BottomNavigationBarItem(
             label: 'Qrcode',
             icon: FaIcon(FontAwesomeIcons.qrcode,
-                color: (_currentIndex == 2) ? Colors.indigo : Colors.grey[600],
+                color: (_currentIndex == 1) ? Colors.indigo : Colors.grey[600],
                 size: 25),
           ),
           BottomNavigationBarItem(
             label: 'settings',
             icon: FaIcon(Icons.settings,
-                color: (_currentIndex == 3) ? Colors.indigo : Colors.grey[600],
+                color: (_currentIndex == 2) ? Colors.indigo : Colors.grey[600],
                 size: 25),
           )
         ],

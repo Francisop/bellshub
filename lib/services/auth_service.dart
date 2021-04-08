@@ -1,4 +1,5 @@
 import 'package:bellshub/models/currentUser.dart';
+import 'package:bellshub/utils/errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -26,19 +27,19 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      return _userFromFirebaseUser(user);
-    } catch (e) {
-      print('signUpWithEmailAndPassword error: $e');
+    } on FirebaseAuthException catch (e) {
+      print(Errors.show(e.code));
+      // print('signUpWithEmailAndPassword error $e');
     }
   }
 
-  Future resetPassword(String email) async {
-    try {
-      return await _auth.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      print('reset Password error: $e');
-    }
-  }
+  // Future resetPassword(String email) async {
+  //   try {
+  //     return await _auth.sendPasswordResetEmail(email: email);
+  //   } catch (e) {
+  //     print('reset Password error: $e');
+  //   }
+  // }
 
   Future signOut() async {
     try {

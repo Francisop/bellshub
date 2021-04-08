@@ -1,18 +1,17 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final _firestore = FirebaseFirestore.instance;
 
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
 
-  getUserByUsername(String username) async {
+  getUserBySearch(String searchQuery) async {
     return await _firestore
         .collection('users')
-        .where("fullname", isEqualTo: username)
+        .where("search_index", arrayContains: searchQuery)
         .get();
   }
 
@@ -26,6 +25,14 @@ class DatabaseService {
   uploadUserInfo(userMap) {
     try {
       _firestore.collection('users').add(userMap);
+    } catch (e) {
+      print('uploaduserinfo exception $e');
+    }
+  }
+
+  updateUserInfo(userId, userMap) {
+    try {
+      return _firestore.collection('users').doc(userId).update(userMap);
     } catch (e) {
       print('uploaduserinfo exception $e');
     }
@@ -62,10 +69,14 @@ class DatabaseService {
   }
 
   getChatRooms(String userMatric) async {
-    return _firestore
-        .collection("ChatRoom")
-        .where("users", arrayContains: userMatric)
-        .snapshots();
+    try {
+      return _firestore
+          .collection("ChatRoom")
+          .where("users", arrayContains: userMatric)
+          .snapshots();
+    } catch (e) {
+      print('getChatRooms error $e');
+    }
   }
 
   getUnreadConversations(chatRoomId, myMatric) async {
@@ -82,12 +93,12 @@ class DatabaseService {
     }
   }
 
-  setReadConversation(chatRoomId) {
+  setReadConversation(chatRoomId, chatId) {
     return _firestore
         .collection('ChatRoom')
         .doc(chatRoomId)
         .collection('chat')
-        .doc()
+        .doc(chatId)
         .update({'read': true});
   }
 
@@ -185,35 +196,113 @@ class DatabaseService {
     }
   }
 
-  setGroupReadConversation(groupRoomId, chatid) {
+  setGroupReadConversation(groupRoomId, groupChatid) {
     return _firestore
         .collection('users')
         .doc('q8gt6W4J7FOnihhE4bU7')
         .collection('groups')
         .doc(groupRoomId)
         .collection('chats')
-        .doc(chatid)
+        .doc(groupChatid)
         .update({'read': true});
   }
 
   //////////////////////////////////
   ///image upload
+
   uploadIdCard(File file) {
     try {
-      return storage.ref().child('imageFolder/').putFile(file).snapshot;
+      Reference ref = storage.ref().child("image1" + DateTime.now().toString());
+      UploadTask uploadTask =  ref.putFile(file);
+      return uploadTask;
+      // uploadTask.then((res) {
+      //   print('hereeeeee');
+      //   print(res.ref.getDownloadURL());
+      //   return res.ref.getDownloadURL();
+      // });
+      // return storage.ref().child('imageFolder/').putFile(file).snapshot;
+
     } catch (e) {
       print('uploadIdCard Error $e');
     }
   }
 
-  updateIdCardUrl(id, downloadUrl) {
+  // updateIdCardUrl(id, downloadUrl) {
+  //   try {
+  //     return _firestore
+  //         .collection('users')
+  //         .doc(id)
+  //         .update({'studentidimageurl': downloadUrl});
+  //   } catch (e) {
+  //     print('updateIdCardUrl error $e');
+  //   }
+  // }
+
+  ///////////////////////////////////////////
+  ///Qrcodes
+//////////////////////////////////////////
+
+  createQrcode(userId, qrcodeMap) {
+    return _firestore
+        .collection("users")
+        .doc(userId)
+        .collection('qrcode')
+        .add(qrcodeMap)
+        .catchError((e) {
+      print("createQrcode error $e");
+    });
+  }
+
+  getCreatedQrcode(userId) {
     try {
       return _firestore
-          .collection('users')
-          .doc(id)
-          .update({'studentidimageurl': downloadUrl});
+          .collection("users")
+          .doc(userId)
+          .collection('qrcode')
+          .where('type', isEqualTo: 'created')
+          .snapshots();
     } catch (e) {
-      print('updateIdCardUrl error $e');
+      print("getCreatedQrcode error $e");
+    }
+  }
+
+  getReceivedQrcode(userId) {
+    try {
+      return _firestore
+          .collection("users")
+          .doc(userId)
+          .collection('qrcode')
+          .where('type', isEqualTo: 'received')
+          .snapshots();
+    } catch (e) {
+      print("getCreatedQrcode error $e");
+    }
+  }
+
+  checkScanned(userId, qrCode) {
+    try {
+      return _firestore
+          .collection("users")
+          .doc(userId)
+          .collection('qrcode')
+          .where('qrcode_code', isEqualTo: qrCode)
+          .get();
+    } catch (e) {
+      print("getCreatedQrcode error $e");
+    }
+  }
+
+  updateScanned(userId, qrcodeId) {
+    try {
+      return _firestore
+          .collection("users")
+          .doc(userId)
+          .collection('qrcode')
+          .doc(qrcodeId)
+          .update({'scanned': true});
+    } catch (e) {
+      print("getCreatedQrcode error $e");
     }
   }
 }
+///////////////////////////////////////////////

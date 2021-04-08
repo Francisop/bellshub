@@ -1,3 +1,4 @@
+import 'package:bellshub/screens/signup_steps/school_info.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       children: [
         Container(
           child: CarouselSlider(
-            items: [BasicInfo(remote), UploadIdCardStep()],
+            items: [BasicInfo(remote), SchoolInfo(remote:remote), UploadIdCardStep()],
             options: CarouselOptions(
                 disableCenter: true,
                 height: MediaQuery.of(context).size.height,

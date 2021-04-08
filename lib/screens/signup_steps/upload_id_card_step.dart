@@ -20,7 +20,7 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
   PickedFile _imageFile;
   final _picker = ImagePicker();
   DatabaseService databaseService = DatabaseService();
-  DownloadTask downloadUrl;
+  var downloadUrl;
   File file;
   QuerySnapshot uId;
   FirebaseStorage taskSnapshot;
@@ -32,33 +32,6 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
     setState(() {
       file = File(_imageFile.path);
     });
-    if (_imageFile != null) {
-      downloadUrl = await databaseService.uploadIdCard(file);
-      print(downloadUrl.snapshot);
-
-      await SharedPrefrenceUtils.saveUserVerifiedSharedPreference('Awaiting');
-
-      print('done');
-
-      print(Constants.myEmail);
-
-      await databaseService
-          .getUserByUserEmail('francisohis@gmail.com')
-          .then((e) {
-        setState(() {
-          uId = e;
-          userId = uId.docs[0].id;
-        });
-        print(uId.docs[0].id);
-      });
-      // Timer(Duration(seconds: 5), () {
-      //   Navigator.push(context, MaterialPageRoute(builder: (_) => MyApp()));
-      // });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('No image uploaded'),
-      ));
-    }
   }
 
   /// Remove image
@@ -68,6 +41,49 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
       file = null;
     });
     // setState(() _imageFile = null);
+  }
+
+  // SAVE IMAGE AND UPDATE USER INFO
+  void saveIdCardandUpdateUser() async {
+    if (_imageFile != null) {
+      await databaseService.uploadIdCard(file).then((val) {
+        print('hereeeeee');
+        print(val.ref.getDownloadURL());
+        val.ref.getDownloadURL().then((e) {
+          setState(() {
+            downloadUrl = e;
+          });
+          print(downloadUrl);
+        });
+      });
+
+      // await SharedPrefrenceUtils.saveUserVerifiedSharedPreference('Awaiting');
+
+      await databaseService.getUserByUserEmail(Constants.myEmail).then((e) {
+        setState(() {
+          uId = e;
+          userId = uId.docs[0].id;
+        });
+      });
+      Map<String, dynamic> userMap = {
+        'studentidimageurl': downloadUrl,
+        'account_setup': true,
+      };
+      await databaseService.updateUserInfo(userId, userMap);
+
+      await SharedPrefrenceUtils.saveUserLoggedInSharedPreference(true);
+      await SharedPrefrenceUtils.saveUploadedIdSharedPreference(false);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => Home()));
+    } else {
+      setState(() {
+        _imageFile = null;
+        file = null;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('No image uploaded'),
+      ));
+    }
   }
 
   initMethodd() async {
@@ -162,7 +178,7 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
               SizedBox(
                 height: 20,
               ),
-              (file != null)
+              (_imageFile != null)
                   ? Container(
                       margin: EdgeInsets.only(left: 14, right: 14),
                       decoration: BoxDecoration(
@@ -172,12 +188,7 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: TextButton.icon(
                         onPressed: () async {
-                          await databaseService.updateIdCardUrl(
-                              userId, downloadUrl);
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => Verification()));
+                          saveIdCardandUpdateUser();
                         },
                         icon: Icon(Icons.done),
                         label: Text(
@@ -189,16 +200,5 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
             ],
           )),
     ));
-  }
-}
-
-class Verification extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(child: Text('Awaiting Verification')),
-      ),
-    );
   }
 }

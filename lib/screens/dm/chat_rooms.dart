@@ -23,16 +23,29 @@ class _ChatRoomsState extends State<ChatRooms> {
   Stream read;
 
   iniateSearch() {
-    setState(() {
-      isLoading = true;
-    });
-    databaseService.getUserByUsername(_searchController.text).then((val) {
-      print(val.docs.toString());
+    if (_searchController.text != '') {
+      FocusScope.of(context).requestFocus(FocusNode());
       setState(() {
-        searchSnapshot = val;
+        isLoading = true;
       });
-      // Navigator.push(context,MaterialPageRoute(builder: (_) => SearchResultBottomSheet(searchSnapshot)));
-    });
+      databaseService
+          .getUserBySearch(_searchController.text.toUpperCase().trim())
+          .then((val) {
+        print(val.docs.toString());
+        setState(() {
+          searchSnapshot = val;
+        });
+      });
+      Timer(new Duration(seconds: 1), () {
+        setState(() {
+          isLoading = false;
+        });
+        searcchResult();
+      });
+      setState(() {
+        _searchController.text = '';
+      });
+    }
   }
 
   @override
@@ -52,11 +65,7 @@ class _ChatRoomsState extends State<ChatRooms> {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: IconButton(
-                  icon: Icon(
-                    Icons.notifications,
-                    size: 30,
-                    color: Colors.pink
-                  ),
+                  icon: Icon(Icons.notifications, size: 30, color: Colors.pink),
                   onPressed: () {},
                 ),
               )
@@ -66,7 +75,10 @@ class _ChatRoomsState extends State<ChatRooms> {
               // padding: const EdgeInsets.only(top: 1.0, bottom: 4.0, left: 8.0),
               padding: const EdgeInsets.all(12),
               child: Text('BellsHub',
-                  style: TextStyle(fontSize: 20, color: Colors.black87)),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold)),
             ),
             elevation: 0.0,
             bottom: PreferredSize(
@@ -83,17 +95,7 @@ class _ChatRoomsState extends State<ChatRooms> {
                             backgroundColor: Colors.pink,
                             child: IconButton(
                               onPressed: () {
-                                setState(() {
-                                  _searchController.text = '';
-                                });
                                 iniateSearch();
-                                Timer timer =
-                                    Timer(new Duration(seconds: 5), () {
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                  searcchResult();
-                                });
                               },
                               icon: Icon(Icons.search),
                             ),
@@ -118,7 +120,7 @@ class _ChatRoomsState extends State<ChatRooms> {
                                     hintText: 'Search...',
                                     fillColor: Colors.grey.shade100,
                                     filled: true)),
-                          ),  
+                          ),
                         ],
                       ),
                     ),
@@ -147,6 +149,17 @@ class _ChatRoomsState extends State<ChatRooms> {
             ? SafeArea(
                 child: Container(
                   child: Column(children: [
+                    // Divider(),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     _launchURL();
+                    //   },
+                    //   child: Text(
+                    //     'Announcement: click here to pay for Buesa dinner',
+                    //     style: TextStyle(color: Colors.black),
+                    //   ),
+                    // ),
+                    // Divider(),
                     SizedBox(
                       height: 20,
                     ),
@@ -173,6 +186,7 @@ class _ChatRoomsState extends State<ChatRooms> {
 
   void searcchResult() async {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (BuildContext context) {
           return SearchResultBottomSheet(searchSnapshot);
@@ -206,7 +220,7 @@ class _ChatRoomsState extends State<ChatRooms> {
                       .toString()
                       .split('_');
                   return ChatRoomsTile(
-                    userName: name[0],
+                    userName: name[1],
                     roomId: snapshot.data.docs[i].get('chatroomId'),
                   );
                   // read: snapshot.data.docs[i].get('chatroomId'));
@@ -223,12 +237,14 @@ class _ChatRoomsState extends State<ChatRooms> {
         chatRoomsStream = val;
       });
     });
+    await SharedPrefrenceUtils.saveUserAnouncementSharedPreference(false);
   }
 }
 
 class ChatRoomsTile extends StatefulWidget {
   final String userName;
   final String roomId;
+
   ChatRoomsTile({this.userName, this.roomId});
 
   @override
@@ -237,36 +253,22 @@ class ChatRoomsTile extends StatefulWidget {
 
 class _ChatRoomsTileState extends State<ChatRoomsTile> {
   DatabaseService databaseService = DatabaseService();
-  Stream read;
-  Stream lastChat;
 
-  checkRead() async {
-    try {
-      Constants.myMatric =
-          await SharedPrefrenceUtils.getUserMatricSharedPreference();
-      read = await databaseService.getUnreadConversations(
-          widget.roomId, Constants.myMatric);
-    } catch (e) {
-      print('check read error $e');
-    }
+  Route _transitionRoute(location) {
+    return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => location,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = Offset(0.0, 0.9);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-    // for (var data in read.data.docs) {
-    //   print('this is the datas count');
-    //   print(data.length);    }
-  }
-
-  getLastChat() {
-    databaseService.getLastMessageSent(widget.roomId).then((val) {
-      setState(() {
-        lastChat = val;
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    // getLastChat();
-    super.initState();
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        });
   }
 
   @override
@@ -275,11 +277,13 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
         ? Container(
             child: ListTile(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => Conversation(
-                            chatRoomId: widget.roomId, name: widget.userName)));
+                Navigator.of(context).push(_transitionRoute(Conversation(
+                    chatRoomId: widget.roomId, name: widget.userName)));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (_) => Conversation(
+                //             chatRoomId: widget.roomId, name: widget.userName)));
               },
               title: Text(
                 widget.userName,
@@ -304,17 +308,20 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
                 height: 30,
                 width: 30,
                 child: StreamBuilder(
-                    stream: databaseService.getUnreadConversations(
-                        widget.roomId, Constants.myMatric),
-                    builder: (_, snapshot) {
+                    stream: FirebaseFirestore.instance
+                        .collection("ChatRoom")
+                        .doc(widget.roomId)
+                        .collection('chats')
+                        .where('read', isEqualTo: false)
+                        .where('sendby', isNotEqualTo: Constants.myMatric)
+                        .snapshots(),
+                    builder: (context, snapshot) {
                       if (snapshot.data == null) return Container();
-                      return (snapshot.data != null &&
-                              snapshot.data.docs.length > 0)
-                          ? CircleAvatar(
-                              radius: 15,
-                              backgroundColor: Colors.indigo.shade200,
-                              child: Text("${snapshot.data.docs.length}"))
-                          : Container();
+                      if (snapshot.data.docs.length < 1) return Container();
+                      return CircleAvatar(
+                          radius: 15,
+                          backgroundColor: Colors.indigo.shade200,
+                          child: Text("${snapshot.data.docs.length}"));
                     }),
               ),
               leading: CircleAvatar(
@@ -358,10 +365,11 @@ class _SearchResultBottomSheetState extends State<SearchResultBottomSheet> {
     // print(widget.searchSnapshot.docs);
     return (widget.searchSnapshot.docs != [])
         ? Container(
+            padding: EdgeInsets.all(12),
             height: 999,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                  topLeft: Radius.circular(50), topRight: Radius.circular(50)),
               color: Colors.white,
             ),
             // decoration:,
@@ -370,32 +378,41 @@ class _SearchResultBottomSheetState extends State<SearchResultBottomSheet> {
                 // shrinkWrap: false,
                 itemBuilder: (context, i) {
                   return ListTile(
-                    contentPadding: EdgeInsets.all(17),
-                    leading: CircleAvatar(
-                        radius: 30,
-                        child: Icon(
-                          FontAwesomeIcons.user,
-                          size: 30,
-                        )),
-                    // title: Text(
-                    //   'what a load',
-                    //   style: TextStyle(color: Colors.black),
-                    // ),
-                    title: Text(
-                      '${widget.searchSnapshot.docs[i].get('fullname')}',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    trailing: MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        Navigator.pop(context);
-                        createChatRoomAndStartConversation(
-                            '${widget.searchSnapshot.docs[i].get('matric')}',
-                            '${widget.searchSnapshot.docs[i].get('fullname')}');
-                      },
-                      child: Text('message'),
-                    ),
-                  );
+                      contentPadding: EdgeInsets.all(17),
+                      leading: CircleAvatar(
+                          backgroundColor: Colors.indigo.shade900,
+                          radius: 30,
+                          child: Icon(
+                            FontAwesomeIcons.user,
+                            size: 30,
+                          )),
+                      // title: Text(
+                      //   'what a load',
+                      //   style: TextStyle(color: Colors.black),
+                      // ),
+                      title: Text(
+                        '${widget.searchSnapshot.docs[i].get('fullname')}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      trailing: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: TextButton.icon(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                createChatRoomAndStartConversation(
+                                    '${widget.searchSnapshot.docs[i].get('matric')}',
+                                    '${widget.searchSnapshot.docs[i].get('fullname')}');
+                              },
+                              icon: Icon(
+                                Icons.message_outlined,
+                                color: Colors.black,
+                              ),
+                              label: Text(
+                                'chat',
+                                style: TextStyle(color: Colors.black),
+                              ))));
                 }),
           )
         : widget.searchSnapshot == null
@@ -412,7 +429,7 @@ class _SearchResultBottomSheetState extends State<SearchResultBottomSheet> {
   }
 
   createChatRoomAndStartConversation(String userMatric, String fullname) {
-    if (userMatric == Constants.myMatric) {
+    if (userMatric != Constants.myMatric) {
       print("this is constant name ${Constants.myMatric}");
       String chatRoomId = getChatRoomId(fullname, Constants.myName);
       List<String> users = [userMatric, Constants.myMatric];
@@ -430,7 +447,7 @@ class _SearchResultBottomSheetState extends State<SearchResultBottomSheet> {
       print("scaffold aint working");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('this is your chat'),
+          content: const Text('this is your Account'),
         ),
       );
     }

@@ -22,7 +22,7 @@ class _GroupConversationState extends State<GroupConversation> {
   DatabaseService databaseService = DatabaseService();
   ScrollController _scrollController = new ScrollController();
   var value;
-
+ 
   initMethod() async {
     Constants.myMatric =
         await SharedPrefrenceUtils.getUserMatricSharedPreference();
@@ -48,7 +48,13 @@ class _GroupConversationState extends State<GroupConversation> {
   }
 
   Color randomColorPicker() {
-    List<Color> randomColors = [Colors.red, Colors.yellow, Colors.white];
+    List<Color> randomColors = [
+      Colors.red[900],
+      Colors.blue[900],
+      Colors.grey[900],
+      Colors.green[900],
+      Colors.purple[900]
+    ];
     final _random = new Random();
     var element = randomColors[_random.nextInt(randomColors.length)];
     return element;
