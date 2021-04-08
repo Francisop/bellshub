@@ -210,33 +210,18 @@ class DatabaseService {
   //////////////////////////////////
   ///image upload
 
-  uploadIdCard(File file) {
+  uploadImage(File file) {
     try {
       Reference ref = storage.ref().child("image1" + DateTime.now().toString());
       UploadTask uploadTask =  ref.putFile(file);
       return uploadTask;
-      // uploadTask.then((res) {
-      //   print('hereeeeee');
-      //   print(res.ref.getDownloadURL());
-      //   return res.ref.getDownloadURL();
-      // });
-      // return storage.ref().child('imageFolder/').putFile(file).snapshot;
 
     } catch (e) {
       print('uploadIdCard Error $e');
     }
   }
 
-  // updateIdCardUrl(id, downloadUrl) {
-  //   try {
-  //     return _firestore
-  //         .collection('users')
-  //         .doc(id)
-  //         .update({'studentidimageurl': downloadUrl});
-  //   } catch (e) {
-  //     print('updateIdCardUrl error $e');
-  //   }
-  // }
+
 
   ///////////////////////////////////////////
   ///Qrcodes

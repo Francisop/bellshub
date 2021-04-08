@@ -292,17 +292,17 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
               subtitle: StreamBuilder(
                   stream: databaseService.getLastMessageSent(widget.roomId),
                   builder: (context, snapshot) {
-                    return (snapshot.data != null)
-                        ? Text(
-                            (snapshot.data.docs[0].get('sendby') ==
-                                    Constants.myMatric)
-                                ? 'you: ${snapshot.data.docs[0].get('message')}'
-                                : '${snapshot.data.docs[0].get('message')}',
-                            style: TextStyle(
-                                color: Colors.grey.shade400, fontSize: 15),
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        : SizedBox.shrink();
+                    if (snapshot.data != null) return Container();
+                    if (snapshot.data != []) return Container();
+                    return Text(
+                      (snapshot.data.docs[0].get('sendby') ==
+                              Constants.myMatric)
+                          ? 'you: ${snapshot.data.docs[0].get('message')}'
+                          : '${snapshot.data.docs[0].get('message')}',
+                      style:
+                          TextStyle(color: Colors.grey.shade400, fontSize: 15),
+                      overflow: TextOverflow.ellipsis,
+                    );
                   }),
               trailing: SizedBox(
                 height: 30,
@@ -318,6 +318,8 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
                     builder: (context, snapshot) {
                       if (snapshot.data == null) return Container();
                       if (snapshot.data.docs.length < 1) return Container();
+                      if (snapshot.data == []) return Container();
+                      if (snapshot.data.docs == []) return Container();
                       return CircleAvatar(
                           radius: 15,
                           backgroundColor: Colors.indigo.shade200,

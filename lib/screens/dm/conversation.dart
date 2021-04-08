@@ -61,9 +61,9 @@ class _ConversationState extends State<Conversation> {
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (_, i) {
                   return MessageTile(
-                    imageCaption: snapshot.data.docs[i].get('image_caption'),
-                    imageUrl: snapshot.data.docs[i].get('message_image'),
-                    type: snapshot.data.docs[i].get('type'),
+                    // imageCaption: snapshot.data.docs[i].get('image_caption'),
+                    imageUrl: snapshot.data.docs[i].get('image_url'),
+                    // type: snapshot.data.docs[i].get('type'),
                     message: snapshot.data.docs[i].get('message'),
                     isSendByMe: snapshot.data.docs[i].get('sendby') ==
                         Constants.myMatric,
@@ -81,7 +81,7 @@ class _ConversationState extends State<Conversation> {
 
     if (_messageController.text.trim() != "") {
       Map<String, dynamic> messageMap = {
-        'type': 'chat',
+        'image_url': '',
         'message': _messageController.text.trim(),
         "sendby": Constants.myMatric,
         "read": false,
@@ -457,64 +457,72 @@ class _ConversationState extends State<Conversation> {
 
 //////////////////////////////////////////////////////////////////////////////
 class MessageTile extends StatelessWidget {
-  final String type;
+  // final String type;
   final String imageUrl;
-  final String imageCaption;
+  // final String imageCaption;
   final String message;
   final bool isSendByMe;
   MessageTile(
       {this.message,
       this.isSendByMe,
-      this.type,
-      this.imageCaption,
+      // this.type,
+      // this.imageCaption,
       this.imageUrl});
   @override
   Widget build(BuildContext context) {
+    print(imageUrl);
     return Container(
-      // height: 300,
       padding: EdgeInsets.only(
         left: isSendByMe ? 0 : 24,
         right: isSendByMe ? 24 : 0,
       ),
-      // width: MediaQuery.of(context).size.width,
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: type == 'chat'
-          ? Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              margin: EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: isSendByMe
-                          ? [Colors.indigo.shade900, Colors.indigo.shade900]
-                          : [Colors.white, Colors.white]),
-                  borderRadius: isSendByMe
-                      ? BorderRadius.only(
-                          topLeft: Radius.circular(23),
-                          topRight: Radius.circular(23),
-                          bottomLeft: Radius.circular(23))
-                      : BorderRadius.only(
-                          topLeft: Radius.circular(23),
-                          topRight: Radius.circular(23),
-                          bottomRight: Radius.circular(23))),
-              child: Text(
-                message,
-                style: TextStyle(
-                    color: isSendByMe ? Colors.white : Colors.indigo[900],
-                    fontSize: 17.0),
-              ),
-            )
-          : Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              margin: EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: isSendByMe
-                        ? [Colors.indigo.shade900, Colors.indigo.shade900]
-                        : [Colors.white, Colors.white]),
-              ),
-              child: Column(children: [
-                Image(image: NetworkImage(imageUrl)),
-              ])),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        margin: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: isSendByMe
+                    ? [Colors.indigo.shade900, Colors.indigo.shade900]
+                    : [Colors.white, Colors.white]),
+            borderRadius: isSendByMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(imageUrl == '' ? 23 : 10),
+                    topRight: Radius.circular(imageUrl == '' ? 23 : 10),
+                    bottomLeft: Radius.circular(imageUrl == '' ? 23 : 10),
+                    //only here for images
+                    bottomRight: Radius.circular(
+                      (imageUrl != '' ? 10 : 0),
+                    ))
+                : BorderRadius.only(
+                    topLeft: Radius.circular(imageUrl == '' ? 23 : 10),
+                    topRight: Radius.circular(imageUrl == '' ? 23 : 10),
+                    bottomRight: Radius.circular(imageUrl == '' ? 23 : 10),
+                    //only here for images
+                    bottomLeft: Radius.circular(imageUrl != '' ? 10 : 0))),
+        child: Column(
+          children: [
+            imageUrl == ''
+                ? SizedBox.shrink()
+                : Container(
+                    padding: EdgeInsets.all(0),
+                    child: Image(
+                        image: NetworkImage(imageUrl),
+                        height: 300,
+                        width: 230,
+                        fit: BoxFit.fill),
+                  ),
+            message != ''
+                ? Text(
+                    message,
+                    style: TextStyle(
+                        color: isSendByMe ? Colors.white : Colors.indigo[900],
+                        fontSize: 17.0),
+                  )
+                : SizedBox.shrink(),
+          ],
+        ),
+      ),
     );
   }
 }

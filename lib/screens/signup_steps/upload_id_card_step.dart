@@ -46,8 +46,7 @@ class _UploadIdCardStepState extends State<UploadIdCardStep> {
   // SAVE IMAGE AND UPDATE USER INFO
   void saveIdCardandUpdateUser() async {
     if (_imageFile != null) {
-      await databaseService.uploadIdCard(file).then((val) {
-        print('hereeeeee');
+      await databaseService.uploadImage(file).then((val) {
         print(val.ref.getDownloadURL());
         val.ref.getDownloadURL().then((e) {
           setState(() {

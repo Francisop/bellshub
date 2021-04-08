@@ -19,6 +19,7 @@ class ImagePreview extends StatefulWidget {
 class _ImagePreviewState extends State<ImagePreview> {
   DatabaseService databaseService = DatabaseService();
   final _captionController = TextEditingController();
+  bool _isLoading = false;
 
   initMethod() async {
     Constants.myMatric =
@@ -60,18 +61,20 @@ class _ImagePreviewState extends State<ImagePreview> {
                     controller: _captionController,
                     maxLines: 5,
                     minLines: 1,
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                    style: TextStyle(color: Colors.white, fontSize: 14),
                     decoration: InputDecoration(
-                        suffixIcon: CircleAvatar(
-                            radius: 27,
-                            child: IconButton(
-                              icon: Icon(Icons.send_outlined,
-                                  color: Colors.white, size: 27),
-                              onPressed: () {
-                                sendImageMessage();
-                                Navigator.pop(context);
-                              },
-                            )),
+                        suffixIcon: _isLoading == false
+                            ? CircleAvatar(
+                                radius: 27,
+                                child: IconButton(
+                                  icon: Icon(Icons.send_outlined,
+                                      color: Colors.white, size: 27),
+                                  onPressed: () {
+                                    sendImageMessage();
+                                  },
+                                ))
+                            : SizedBox(
+                                height: 20, child: CircularProgressIndicator()),
                         border: InputBorder.none,
                         hintText: 'Add a Caption ..',
                         hintStyle:
@@ -82,20 +85,32 @@ class _ImagePreviewState extends State<ImagePreview> {
     );
   }
 
-  sendImageMessage() {
+  sendImageMessage() async {
     if (widget.file != null) {
-      Map<String, dynamic> messageMap = {
-        'type': 'image',
-        'image_caption': _captionController.text.trim(),
-        "sendby": Constants.myMatric,
-        "read": false,
-        "time": DateTime.now().millisecondsSinceEpoch,
-        "message_image": '',
-      };
-      databaseService.addConversationMessages(widget.chatRoomId, messageMap);
+      setState(() {
+        _isLoading = true;
+      }); 
+// save to storage first
+      await databaseService.uploadImage(widget.file).then((e) {
+        e.ref.getDownloadURL().then((imageUrl) {
+          Map<String, dynamic> messageMap = {
+            'image_url': imageUrl,
+            'message': _captionController.text.trim(),
+            "sendby": Constants.myMatric,
+            "read": false,
+            "time": DateTime.now().millisecondsSinceEpoch
+          };
+          databaseService.addConversationMessages(
+              widget.chatRoomId, messageMap);
+        });
+      });
       setState(() {
         _captionController..text = "";
       });
-    } 
+    }
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.pop(context);
   }
 }
