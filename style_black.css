@@ -1,0 +1,33 @@
+body {
+	background:url(bgr_body.jpg) repeat-x 0 0 #FFF;
+}
+#header .search .text input {
+	border:1px solid #d2d2d2;
+	color:#b2b2b2;
+	background-color:#FFF;
+}
+#header .search .submit {
+	border:1px solid #d2d2d2;
+}
+#header .search .submit input {
+	background-color:#efefef;
+	color:#525252;
+}
+#logo {
+	background:url(logo.png) no-repeat 0 0;
+}
+#body .sidebar .body ul.sub_menu li a.sub,#body .sidebar .body ul.sub_menu li a:hover {
+	background:url(https://portal.bellsuniversity.edu.ng/payments/images/light/ico_grey_dot.png) no-repeat 4px 5px;
+}
+#featured_slider .nav a:hover,.nivo-controlNav a:hover {
+	background-color:#000;
+}
+#body .highlight {
+	background:#000;
+}
+#body pre,#body .code {
+	border-color:#000;
+}
+a:focus,a:hover,#featured_content .body .third .author p a,#featured_content .body .box a:hover,#body p a,#body .main_content .blog .blog_post .post_head .post_info p a,#body .main_content .blog .blog_post .tags a,#body .page_numbering ul li a:hover,#body .main_content .comments .comment .comment_content .comment_head .right,#body .main_content .comments .comment .comment_content .comment_head .right a,#body .main_content .comments .comment .comment_content .comment_data a,#body .main_content .comments .comment .comment_content .comment_data a:hover,#body .full_width .three_column_portfolio .item .actions a:hover,#three_boxes .box p a,#footer .content .box a:hover,#footer .copy a:hover,#body .sidebar .body ul.sub_menu li a.sub,#body .sidebar .body ul.sub_menu li a:hover,#body .full_width .big_portfolio .item .actions a:hover {
+	color:#000;
+}

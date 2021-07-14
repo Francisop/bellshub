@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>BELLSUNI - Payments Portal : Payment Details</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen,projection"
+      href="reset.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen,projection"
+      href="general.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen,projection"
+      href="fancybox.css"
+    />
+
+    <!-- Styles -->
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="style_black.css"
+    />
+
+    <!-- /Styles -->
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/hoverIntent.js"></script>
+    <script type="text/javascript" src="js/superfish.js"></script>
+
+    <script type="text/javascript" src="js/cufon-yui.js"></script>
+    <script
+      type="text/javascript"
+      src="js/Myriad_Pro_400-Myriad_Pro_600-Myriad_Pro_italic_400-Myriad_Pro_italic_600.font.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="js/jquery.mousewheel-3.0.2.pack.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/jquery.fancybox-1.3.1.pack.js"
+    ></script>
+
+    <script type="text/javascript" src="js/custom.js"></script>
+
+    <!--[if IE 6]>
+      <script
+        type="text/javascript"
+        src="../../js/DD_belatedPNG_0.0.8a.min.js"
+      ></script>
+      <script type="text/javascript" src="../../js/ie_png_fix.js"></script>
+      <style media="screen,projection" type="text/css">
+        @import "../../css/style-ie-6.css";
+      </style>
+    <![endif]-->
+
+    <style type="text/css">
+      <!--
+      .style1 {
+      	font-family: Georgia, "Times New Roman", Times, serif;
+      	font-size: 14px;
+      }
+      -->
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="header">
+        <a
+          href="#"
+          id="logo"
+          title="BELLSUNI - Payments Portal : Payment Details"
+        ></a>
+      </div>
+      <!-- /header -->
+      <div id="body">
+        <div class="full_width">
+          <div class="head">
+            <h1>Payment Summary</h1>
+          </div>
+
+          <div class="content">
+            <p class="box-black style1">
+              Your transaction reference is given as
+              <b><u>(3181901160111221)</u></b
+              >. <br />Please note this number as it may be used for tracking
+              your payment. <br />
+              Kindly be made aware that the specified Registration ID
+              <b><u>(2018/7322)</u></b> belongs to
+              <b><u>(ONWUKWE FRANCIS CHINAZA)</u></b
+              >. <br /><u
+                >Click on " Pay Now » " button below to confirm your payment on
+                behalf of the Registration number and Name indicated above.</u
+              >
+            </p>
+            <!-- box-black-->
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td width="16%">Registration ID:</td>
+
+                  <td width="84%">
+                    <b><u>2018/7322</u></b>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Fullname:</td>
+
+                  <td>
+                    <b><u>ONWUKWE FRANCIS CHINAZA</u></b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td width="17%">&nbsp;</td>
+
+                  <td width="26%">&nbsp;</td>
+
+                  <td width="57%">&nbsp;</td>
+                </tr>
+
+                <tr>
+                  <td>&nbsp;</td>
+
+                  <td>Payment Description:</td>
+
+                  <td>
+                    <u><b>Tution Fee</b></u>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </td>
+                  <td>Amount:</td>
+
+                  <td>
+                    <b><u>=N=__________330,000:00</u></b>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>&nbsp;</td>
+
+                  <td>Bank Charges:</td>
+
+                  <td>
+                    <u><b>=N=____________350:00</b></u>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>&nbsp;</td>
+
+                  <td>Total:</td>
+
+                  <td>
+                    <u><b>=N=__________330,350:00</b></u>
+                  </td>
+                </tr>
+                <form
+                  name="form1"
+                  action=""
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <tr>
+                    <td>&nbsp;</td>
+
+                    <td>&nbsp;</td>
+
+                    <td>
+                      <input
+                        type="submit"
+                        name="cancel"
+                        value="  << Cancel "
+                        id="cancel"
+                        onclick="document.forms[0].action = 'homepage.php'"
+                        style="height: 30px"
+                      />
+
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                      <!--///////////////////////////////////////////////////////////-->
+
+                      <form>
+                        <script src="https://js.paystack.co/v1/inline.js"></script>
+                        <button
+                          name="pay"
+                          id="pay"
+                          style="height: 30px"
+                          type="button"
+                          onclick="payWithPaystack()"> Pay Now >> </button>
+                      </form>
+
+                      <script>
+                        function payWithPaystack() {
+                          var handler = PaystackPop.setup({
+                            key: "pk_live_45682a883c522ad36a17f49f955123da08eaac72",
+                            email: "francisohis@email.com",
+                            amount: 33035000,
+                            currency: "NGN",
+                            ref:
+                              "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                            metadata: {
+                              custom_fields: [
+                                {
+                                  display_name: "Mobile Number",
+                                  variable_name: "mobile_number",
+                                  value: "+2348012345678",
+                                },
+                              ],
+                            },
+                            callback: function (response) {
+                              alert(
+                                "success. transaction ref is " +
+                                  response.reference
+                              );
+                            },
+                            onClose: function () {
+                              alert("window closed");
+                            },
+                          });
+                          handler.openIframe();
+                        }
+                      </script>
+
+                      <!--///////////////////////////////////////////////////////////-->
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>&nbsp;</td>
+
+                    <td colspan="2">
+                      <div align="left">
+                        <img
+                          src="images/isw_logo_new_combined.png"
+                          alt="Interswitch Logo"
+                          width="330"
+                          height="41"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+
+                  <p>
+                    <input name="product_id" type="hidden" value="6987" />
+                    <input name="amount" type="hidden" value="135000" />
+                    <input name="currency" type="hidden" value="566" />
+                    <input
+                      name="payment_params"
+                      type="hidden"
+                      value="college_split"
+                    />
+                    <input
+                      name="site_redirect_url"
+                      type="hidden"
+                      value="http://portal.bellsuniversity.edu.ng/payments/getresponse.php?echo="
+                    />
+                    <input
+                      name="site_name"
+                      type="hidden"
+                      value="http://portal.bellsuniversity.edu.ng/payments/index.php"
+                    />
+                    <input name="cust_id" type="hidden" value="2018/7322" />
+                    <input name="cust_id_desc" type="hidden" value="Reg. No." />
+                    <input
+                      name="cust_name"
+                      type="hidden"
+                      value="ONWUKWE Benjamin CHINAZA"
+                    />
+                    <input
+                      name="cust_name_desc"
+                      type="hidden"
+                      value="Full name"
+                    />
+                    <input
+                      name="txn_ref"
+                      type="hidden"
+                      value="3181901160111221"
+                    />
+                    <input name="pay_item_id" type="hidden" value="102" />
+                    <input
+                      name="pay_item_name"
+                      type="hidden"
+                      value="LOG BOOK"
+                    />
+                    <input name="local_date_time" type="hidden" value="" />
+                    <input
+                      name="hash"
+                      type="hidden"
+                      value="1C5D450A550FD133FC6D7461CBE083CBA2AC31F3134F7F7AAFEAF5F10B08ACEDF9579988CE2629BAEF25B2486F3B9C26314F667FA58954F3A994F9461A292004"
+                    />
+                    <input
+                      name="xml_data"
+                      type="hidden"
+                      value='<payment_item_detail>
+								  <item_details detail_ref="3181901160111221" college="BELLSUNI" department="BELLSUNI" faculty="BELLSUNI">
+								  <item_detail item_id="1" item_name="LOG BOOK" item_amt="1050.00" bank_id="7" acct_num="1004935259" />
+								  </item_details>
+								  </payment_item_detail>'
+                    />
+                  </p>
+                </form>
+              </tbody>
+            </table>
+          </div>
+          <!-- /content -->
+        </div>
+        <!-- /full_width -->
+      </div>
+      <!-- /body -->
+      <div id="footer">
+        <p class="copy">
+          Copyright &copy; 2021 <a href="#">ESSCON</a>. All rights reserved.
+        </p>
+      </div>
+      <!-- /footer -->
+    </div>
+    <!-- /wrapper -->
+  </body>
+</html>

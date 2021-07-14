@@ -1,0 +1,357 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>BELLSUNI - Payments Portal</title>
+	
+	
+	<link rel="stylesheet" type="text/css" media="screen,projection" href="reset.css" />
+	<link rel="stylesheet" type="text/css" media="screen,projection" href="general.css" />
+	<link rel="stylesheet" type="text/css" media="screen,projection" href="fancybox.css" />
+	
+	<!-- Styles -->
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="style_black.css" />
+
+	<!-- /Styles -->
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="js/hoverIntent.js"></script>
+	<script type="text/javascript" src="js/superfish.js"></script>
+	
+	<script type="text/javascript" src="js/cufon-yui.js"></script>
+	<script type="text/javascript" src="js/Myriad_Pro_400-Myriad_Pro_600-Myriad_Pro_italic_400-Myriad_Pro_italic_600.font.js"></script>
+	
+	<script type="text/javascript" src="js/jquery.mousewheel-3.0.2.pack.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox-1.3.1.pack.js"></script>
+	
+	<script type="text/javascript" src="js/custom.js"></script>
+	
+	<!--[if IE 6]>
+		<script type="text/javascript" src="../../js/DD_belatedPNG_0.0.8a.min.js"></script>
+		<script type="text/javascript" src="../../js/ie_png_fix.js"></script>
+		<style media="screen,projection" type="text/css">@import "../../css/style-ie-6.css";</style>
+	<![endif]-->
+<script type="text/javascript">
+function validate()
+{
+x=document.form1
+mat=x.mat_no.value
+selection = x.category.value
+
+if(mat == "") 
+{
+ alert("Please supply a Matric/Staff Number")
+ return false
+}
+if (selection == ""){
+alert("Please make a selection")
+ return false
+}
+if (selection != "UG"){
+alert("This User doesn't exist -- please check details")
+ return false
+}
+else 
+{
+  location.replace("period-selection.html")
+}
+
+}
+</script>	
+	
+    <style type="text/css">
+<!--
+.style1 {color: #003399}
+.style2 {color: #930}
+.style3 {color: #003399;
+        font-size: 12px;
+		font-family: Georgia;
+	}
+.style4 {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+.RedText {
+	FONT-FAMILY: verdana, arial, sans-serif; color:#FF0000; FONT-SIZE: 10px; FONT-WEIGHT: bold; LINE-HEIGHT: 18px; PADDING-LEFT: 4px}
+-->
+    </style>
+</head>
+<body>
+	<div class="wrapper">
+    <div id="header">
+			<a href="#" id="logo" title="BELLSUNI - Payments Portal"></a>
+			
+		</div>
+		<div id="body">
+			<div class="main_content">
+				<div class="content blog">
+					<div class="blog_post">
+                    
+						<div class="post_head">
+							<p class="box-blue">
+        The Payment Summary below displays the breakdown of the total fee charged for each payment item. To make payment, first time users will be asked  to Register an Account. To begin, supply your Matriculation Number/Staff Number/Email Address/Registration ID below.</p>
+					  </div><!-- /post_head -->
+						<div class="post_data">
+						 <h2><u>Make Payment or Login</u></h2>
+                          <form action="" method="post" id="form1" name="form1" enctype="multipart/form-data">
+                          <table border="0" cellspacing="0" cellpadding="0">
+                           <tbody> 
+                            <tr>
+                            <td width="41%"><span class="style3">Supply your ID Number:
+                                <input type="text" name="mat_no" id="mat_no" value="" maxlength="50" size="20" />
+                                &nbsp;&nbsp; (Matric/Staff Number/Email Address/Registration ID)                           </span></td>
+                            </tr>
+                            <tr>
+                              <td><span class="style3">Select your Catergory:
+                              <select name="category" id="category">
+                              <option value="" selected="selected">--</option>
+                              <option value="UG">Undergraduate</option>
+                              <option value="PG">Postgraduate</option>
+                              <option value="DE">Direct Entry</option>
+                              <option value="ST">Staff</option>
+							  <option value="CF">Conference Participant</option>
+							  <option value="OT">Others</option>
+                              </select>
+                              </span></td>
+                            </tr>
+                            <tr>
+                              <td><span class="style3">
+                                <input type="button" name="search" value=" Proceed &gt;&gt; " id="search" onClick="validate()" style="height:30px;" />
+                              </span></td>
+                            </tr>
+                            <tr>
+                            <td><span class="RedText"></span></td>
+                            </tr>
+                           </table>
+                       	  </form> 
+                          <h2><u>Payment Summary </u></h2>
+                           <table border="0" cellspacing="0" cellpadding="0">
+                           <thead>
+                            <tr>
+                             <th>Payment Items</th>
+                            <th>Fees</th>
+                            </tr>
+                            </thead>
+		                    <tbody> 
+                             
+                            <tr>
+                            <td>COLNAS INSTRUCTIONAL MATERIALS</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SWEP-ENGINEERING STUDENTS</td>
+                            <td>=N=65,000:00</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SWEP</td>
+                            <td>=N=65,000:00</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>LOG BOOK</td>
+                            <td>=N=1,000:00</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SIWES FEE</td>
+                            <td>=N=10,000:00</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SURVEY CAMP FEE</td>
+                            <td>=N=50,000:00</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>CONVOCATION GOWN</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>LOCAL TRANSCRIPT</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>FOREIGN TRANSCRIPT</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>REPLACEMENT OF ID CARD</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>IDENTIFICATION LETTER</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>LATE REGISTRATION FEE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>MEDICAL BILL</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SALE OF BOARDED ITEMS</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>ICAN TRAINING FEE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SEMINAR/WORKSHOP</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>I.C.T.A. 2019 CONFERENCE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>CHANGE OF COURSE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>VERIFICATION OF RESULT</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>I.D CARD</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>COMPUTER SCIENCE PRACTICAL MANUALS</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>CORRECTION OF NAME ON CERTIFICATE CHARGE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>INCOME FROM MATRESS</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>POST GRADUATES ACCOMMODATION</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>BUPF LEVY</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SILVER HALL </td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>DAMAGES</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>SPORT FACILITIES</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>LIBRARY</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>CONVOCATION REFUNDABLE DEPOSIT</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>RE-ISSUANCE OF CERTIFICATE</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>INTEGRITY/ ANTI - PLAGIARISM TEST</td>
+                            <td>As applicable</td>
+                            </tr>
+                             
+                            <tr>
+                            <td>REVIEW OF ANSWER SCRIPTS</td>
+                            <td>As applicable</td>
+                            </tr>
+                                                        </tbody>
+                            <tfoot>
+                            </tfoot>
+                       </table>
+						  
+<ul>
+      <li>All Fees are payable via InterSwitch Payment  Platform</li>
+      <li>Note that a bank transaction charge is applicable  for all InterSwitch payments</li>
+    </ul>
+                          
+<h2><u><a name="contact">Contact Us</a></u>	</h2>
+<ul>
+  <li><strong>Phone Numbers: </strong> 08052434901, 07038558678 </li>
+        <li><b>Email Address: </b> icthelpdesk@bellsuniversity.edu.ng</li>
+  </ul>
+
+
+
+
+
+                          
+					  </div><!-- /post_data -->
+					</div><!-- /blog_post -->
+			</div><!-- /content -->
+			</div><!-- /main_content -->
+			<div class="sidebar">
+				<div class="body">
+					<div class="top">
+						<h3><span class="style1">Portal Menu</span></h3>
+						<ul class="sub_menu">
+                            <li>
+							<li ><a href="http://bellsuniversity.edu.ng" target="_blank"><span class="style2">BELLS Home</span></a></li>
+                            <li><a href="verify/"><span class="style2">Payment Verification</span></a></li>
+                          	</li>
+						</ul>
+						<p>&nbsp;</p>
+					</div><!-- /top -->
+				</div><!-- /body -->
+				<div class="bot"></div>
+			</div><!-- /sidebar -->
+		</div><!-- /body -->
+		<div id="footer">
+			<div class="footer_box">
+			  <!-- /content -->
+</div>
+			<!-- /footer_box -->
+			<p class="copy">Copyright &copy; 2021 <a href="#">ESSCON</a>. All rights reserved.</p>
+		</div><!-- /footer -->
+	</div><!-- /wrapper -->
+</body>
+</html>
