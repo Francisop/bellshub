@@ -1,101 +1,113 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bells University of Technology - Student Portal : Login Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bells University of Technology - Student Portal : Login Page</title>
 
-<link href="light/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="light/css/brain-theme.css" rel="stylesheet" type="text/css">
-<link href="light/css/styles.css" rel="stylesheet" type="text/css">
-<link href="light/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
+    <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="brain-theme.css" rel="stylesheet" type="text/css">
+    <link href="istyle.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
-<script type="text/javascript" src="light/js/plugins/charts/flot.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/flot.orderbars.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/flot.pie.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/flot.time.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/flot.animator.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/excanvas.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/charts/flot.resize.min.js"></script>
-
-<script type="text/javascript" src="light/js/plugins/forms/uniform.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/select2.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/inputmask.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/autosize.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/inputlimit.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/listbox.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/multiselect.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/validate.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/tags.min.js"></script>
-
-<script type="text/javascript" src="light/js/plugins/forms/uploader/plupload.full.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/uploader/plupload.queue.min.js"></script>
-
-<script type="text/javascript" src="light/js/plugins/forms/wysihtml5/wysihtml5.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/forms/wysihtml5/toolbar.js"></script>
-
-<script type="text/javascript" src="light/js/plugins/interface/jgrowl.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/datatables.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/prettify.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/fancybox.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/colorpicker.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/timepicker.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/fullcalendar.min.js"></script>
-<script type="text/javascript" src="light/js/plugins/interface/collapsible.min.js"></script>
-
-<script type="text/javascript" src="light/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="light/js/application.js"></script>
-
-<script type="text/javascript" src="light/js/charts/simple_graph.js"></script>
 
 
-<script type="text/javascript">
-function validate()
-{
-x=document.form1
-passz=x.mat.value
-passy=x.pass.value
+    <script type="text/javascript" src="light/js/plugins/charts/flot.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/flot.orderbars.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/flot.pie.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/flot.time.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/flot.animator.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/excanvas.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/charts/flot.resize.min.js"></script>
 
-if(passz == "")
-{
- alert("Please enter your Matric Number")
- return false
-}
-else if(passy == "") 
-{
- alert("Please enter your Password")
- return false
-}
-else
-{
- return true
-}
+    <script type="text/javascript" src="light/js/plugins/forms/uniform.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/select2.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/inputmask.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/autosize.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/inputlimit.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/listbox.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/multiselect.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/validate.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/tags.min.js"></script>
 
-}
-</script>	
-	<style type="text/css">
-<!--
-.style1 {
-	font-size: 10px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-}
-.style7 {font-size: 12px; color: #009900; font-family: Verdana, Arial, Helvetica, sans-serif;}
-.RedText {
-	FONT-FAMILY: verdana, arial, sans-serif; color:#FF0000; FONT-SIZE: 10px; FONT-WEIGHT: bold; LINE-HEIGHT: 18px; PADDING-LEFT: 4px}
-.style6 {
-	color: #003399;
-	font-size: 12px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-}
-.style14 {color: #003399}
--->
+    <script type="text/javascript" src="light/js/plugins/forms/uploader/plupload.full.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/uploader/plupload.queue.min.js"></script>
+
+    <script type="text/javascript" src="light/js/plugins/forms/wysihtml5/wysihtml5.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/forms/wysihtml5/toolbar.js"></script>
+
+    <script type="text/javascript" src="light/js/plugins/interface/jgrowl.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/datatables.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/prettify.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/fancybox.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/colorpicker.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/timepicker.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="light/js/plugins/interface/collapsible.min.js"></script>
+
+    <script type="text/javascript" src="light/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="light/js/application.js"></script>
+
+    <script type="text/javascript" src="light/js/charts/simple_graph.js"></script>
+
+
+    <script type="text/javascript">
+        function validate() {
+            x = document.form1
+            passz = x.mat.value
+            passy = x.pass.value
+
+            if (passz == "") {
+                alert("Please enter your Matric Number")
+                return false
+            }
+            else if (passy == "") {
+                alert("Please enter your Password")
+                return false
+            }
+            else {
+                return true
+            }
+
+        }
+    </script>
+    <style type="text/css">
+        <!--
+        .style1 {
+            font-size: 10px;
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+
+        .style7 {
+            font-size: 12px;
+            color: #009900;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+        }
+
+        .RedText {
+            FONT-FAMILY: verdana, arial, sans-serif;
+            color: #FF0000;
+            FONT-SIZE: 10px;
+            FONT-WEIGHT: bold;
+            LINE-HEIGHT: 18px;
+            PADDING-LEFT: 4px
+        }
+
+        .style6 {
+            color: #003399;
+            font-size: 12px;
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+
+        .style14 {
+            color: #003399
+        }
+        -->
     </style>
 
 </head>
@@ -105,16 +117,16 @@ else
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left-custom">
-                    <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            
-                            <span>Login Page</span>
-                            
-                        </a>
-                        
-                    </li>
-                    <li><a class="nav-icon sidebar-toggle"><i class="fa fa-bars"></i></a></li>
-                </ul>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+
+                        <span>Login Page</span>
+
+                    </a>
+
+                </li>
+                <li><a class="nav-icon sidebar-toggle"><i class="fa fa-bars"></i></a></li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right collapse" id="navbar-right">
                 <li>
@@ -131,120 +143,130 @@ else
                     </a>
                 </li>
 
-                
+
             </ul>
         </div>
     </div>
     <!-- /navbar -->
 
 
-    
+
 
 
     <!-- Page container -->
     <div class="page-container container-fluid">
-    	
-    	
 
-    
+
+
+
         <!-- Page content -->
         <div class="page-content">
 
-            
 
-                    
+
+
             <!-- Simple chart -->
             <div class="panel panel-default">
-            <div class="panel-heading">
-            
+                <div class="panel-heading">
+
                 </div>
-                
+
                 <div class="panel-body">
-                <div class="logo" align="center">
-                <img src="img/logoimage.png" alt="">
-                </div>
-               
-   <div class="login-wrapper">
-    	<form action="" name="form1" id="form1" method="post" enctype="multipart/form-data">
-			<div class="panel panel-info">
-
-                        <div class="panel-heading">
-
-                            <h6 class="panel-title">User Login</h6>
-
-                            <div class="panel-icons-group">
-
-                                <a href="#" class="btn btn-link btn-icon"><i class="fa fa-users"></i></a>
-
-                                
-                            </div>
-
-                        </div>
-
-          <div class="panel-body">
-          <div align="center" class="RedText"></div>
-			<div class="well">
-				<div class="form-group has-feedback">
-					<label>Matric Number</label>
-					<input type="text" class="form-control" name="mat" id="mat" placeholder="Matric Number" maxlength="20">
-					<i class="icon-users form-control-feedback"></i>
-				</div>
-
-				<div class="form-group has-feedback">
-					<label>Password</label>
-					<input type="password" class="form-control" name="pass" id="pass" placeholder="Password" maxlength="20">
-					<i class="icon-lock form-control-feedback"></i>
-				</div>
-
-				<div class="row form-actions">
-					<div class="col-xs-6">
-                    &nbsp;
+                    <div class="logo" align="center">
+                        <img   src="img/logoimage.png" alt="">
                     </div>
 
-					<div class="col-xs-6">
-						<input type="submit" onclick="return validate()" value="Sign in" name="ok" class="btn btn-warning pull-right"></button>
-					</div>
-				</div>
-			</div>
-            </div>
-            </div>
-    	</form>
-       <div align="right"><a href="recoverpass.php" target="_blank">forgot password?</a></div>
+                    <div class="login-wrapper">
+                        <form action="" name="form1" id="form1" method="post" enctype="multipart/form-data">
+                            <div class="panel panel-info">
 
-	</div> 
-    <!--<div  align="center"><strong><i>Fresh Students</i> <u><a title="Create A Portal Account" href="freshaccount.php">Click here</a></u></strong> to create a Portal Account.</div>-->
-    
-    
-    <br />
-      <!--  <div class="RedText"><strong>Resumption Date for Second Semester:
+                                <div class="panel-heading">
+
+                                    <h6 class="panel-title">User Login</h6>
+
+                                    <div class="panel-icons-group">
+
+                                        <a href="#" class="btn btn-link btn-icon"><i class="fa fa-users"></i></a>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-body">
+                                    <div align="center" class="RedText"></div>
+                                    <div class="well">
+                                        <div class="form-group has-feedback">
+                                            <label>Matric Number</label>
+                                            <input type="text" class="form-control" name="mat" id="mat"
+                                                placeholder="Matric Number" maxlength="20">
+                                            <i class="icon-users form-control-feedback"></i>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control" name="pass" id="pass"
+                                                placeholder="Password" maxlength="20">
+                                            <i class="icon-lock form-control-feedback"></i>
+                                        </div>
+
+                                        <div class="row form-actions">
+                                            <div class="col-xs-6">
+                                                &nbsp;
+                                            </div>
+
+                                            <div class="col-xs-6">
+                                                <input type="submit" onclick="return validate()" value="Sign in"
+                                                    name="ok" class="btn btn-warning pull-right"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div align="right"><a href="recoverpass.php" target="_blank">forgot password?</a></div>
+
+                    </div>
+                    <!--<div  align="center"><strong><i>Fresh Students</i> <u><a title="Create A Portal Account" href="freshaccount.php">Click here</a></u></strong> to create a Portal Account.</div>-->
+
+
+                    <br />
+                    <!--  <div class="RedText"><strong>Resumption Date for Second Semester:
         <li>10th March 2019</li>
        
         </strong></div>-->
-    <div  align="center" class="RedText"><strong>For payment of other bills (e.g. Tuition,Swep) click <a href="payment-login.html" target="_blank">here,</a> payment at the Bank is prohibited.</strong>
-    <hr />
-    
-    
-    <div  align="left" class="style6"><strong><!--<i>Returning Students</i>--> Incase you have any issues relating to the Portal you may contact:</strong>
-    <br />
-Phone number: 0703 256 6067, 0703 318 0831, 0805 243 4901<br />
-Email Address: icthelpdesk@bellsuniversity.edu.ng, portalenquiries@bellsuniversity.edu.ng, ictdirector@bellsuniversity.edu.ng
-</div>
+                    <div align="center" class="RedText"><strong>For payment of other bills (e.g. Tuition,Swep) click <a
+                                href="payment-login.html" target="_blank">here,</a> payment at the Bank is
+                            prohibited.</strong>
+                        <hr />
+
+
+                        <div align="left" class="style6"><strong>
+                                <!--<i>Returning Students</i>--> Incase you have any issues relating to the Portal you
+                                may contact:
+                            </strong>
+                            <br />
+                            Phone number: 0805 646 6478<br />
+                            Email Address: icthelpdesk@bellsuniversity.edu.ng, portalenquiries@bellsuniversity.edu.ng,
+                            ictdirector@bellsuniversity.edu.ng
+                        </div>
+                    </div>
                 </div>
+                <!-- /simple chart -->
+
+
+
+                <!-- Footer -->
+                <div class="footer">
+                    Copyright &copy; 2021 <a href="#">ESSCON</a>. All rights reserved.
+                </div>
+                <!-- /footer -->
+
             </div>
-            <!-- /simple chart -->
-
-              
-
-            <!-- Footer -->
-            <div class="footer">
-               Copyright &copy; 2021 <a href="#">ESSCON</a>. All rights reserved.
-            </div>
-            <!-- /footer -->
-
         </div>
-    </div>
 </body>
 <link href='fonts.googleapis.com/css0c38.css?family=Cuprum' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+
 </html>
