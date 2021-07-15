@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+
+        <script src="https://checkout.flutterwave.com/v3.js"></script>
+        <button type="button" onClick="makePayment()">Pay Now</button>
+    </form>
+
+    <script>
+        function makePayment() {
+            var ama = document.getElementById("totalhid").value;
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK-efe729082a6c65a9e0b0da190d7b4434-X",
+                tx_ref: "" + Math.floor(Math.random() * 1000000000 + 1),
+                amount: ama,
+                currency: "NGN",
+                country: "NG",
+                payment_options: " ",
+                redirect_url: // specified redirect URL
+                    "https://callbacks.piedpiper.com/flutterwave.aspx?ismobile=34",
+                customer: {
+                    email: "kennethobinna14@gmail.com",
+                    phone_number: "+2348032592277",
+                    name: "Kenneth Obinna",
+                },
+                callback: function (data) {
+                    console.log(data);
+                },
+                onclose: function () {
+                    // close modal
+                },
+                customizations: {
+                    title: "BellsUniversity of Technology",
+                    description: "Payment of Tuition Fee for ",
+                    logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.schoolcontents.info%2F2019%2F03%2Fbell-university-top-up-degree-hnd.html&psig=AOvVaw1uLq19qIxoIR4t-NoPV4__&ust=1626427983045000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCND0pKfj5PECFQAAAAAdAAAAABAO",
+                },
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+<script>
+    function payWithPaystack() {
+        var ama = document.getElementById("totalhid").value;
+        var handler = PaystackPop.setup({
+            key: "pk_live_45682a883c522ad36a17f49f955123da08eaac72",
+            email: "kennethobinna14@gmail.com",
+            amount: ama,
+            currency: "NGN",
+            ref:
+                "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            /* metadata: {
+              custom_fields: [
+                {
+                  display_name: "Mobile Number",
+                  variable_name: "mobile_number",
+                  value: "+2348032592277",
+                },
+              ],
+            }, */
+            callback: function (response) {
+                alert(
+                    "success. transaction ref is " +
+                    response.reference
+                );
+            },
+            onClose: function () {
+                alert("window closed");
+            },
+        });
+        handler.openIframe();
+    }

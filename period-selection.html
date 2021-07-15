@@ -138,6 +138,10 @@
           alert("Please input an amount that isn't 0");
           return false;
         }
+        if (inp.value > 4999,650) {
+          alert("Please input an amount that isn't 0");
+          return false;
+        }
         if (inp.value != "") {
           var fee = inp.value;
           sessionStorage.setItem("fee", fee);
@@ -147,7 +151,7 @@
       }
 
       else {
-        var fee = 889000;
+        var fee = 444500;
         sessionStorage.setItem("fee", fee);
         location.href = "payment-details.html";
 
@@ -238,7 +242,9 @@
                             </option>
 
                             <option value="first">FIRST SEMESTER</option>
+                            <option value="mid-first">MID FIRST SEMESTER</option>
                             <option value="second">SECOND SEMESTER</option>
+                            <option value="mid-second">MID SECOND SEMESTER</option>
                             <option value="stag">STAGGERED</option>
                           </select>
 
