@@ -35,11 +35,15 @@
 
     window.addEventListener('load', (event) => {
       var fee = sessionStorage.getItem("fee");
+      
+       var newFee = fee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
       if (fee != "") {
         var total = parseInt(fee) + 350;
+        var newTotal = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var hid = total * 100;
-        document.getElementById("cost").innerHTML = "=N=__________" + fee + ":00";
-        document.getElementById("total").innerHTML = "=N=__________" + total + ":00";
+        document.getElementById("cost").innerHTML = "=N=__________" + newFee + ":00";
+        document.getElementById("total").innerHTML = "=N=__________" + newTotal + ":00";
         document.getElementById("totalhid").value = hid;
         // alert(hid)
       }
