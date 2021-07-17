@@ -5,24 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test</title>
 </head>
 
 <body>
+
     <form>
         <script src="https://js.paystack.co/v1/inline.js"></script>
-
-        <script src="https://checkout.flutterwave.com/v3.js"></script>
-        <button type="button" onClick="makePayment()">Pay Now</button>
+        <button type="button" onClick="payWithPaystack()">Pay Now</button>
     </form>
 
+
+
     <script>
+        function payWithPaystack() {
+            // var ama = document.getElementById("totalhid").value;
+            var handler = PaystackPop.setup({
+                key: "pk_live_45682a883c522ad36a17f49f955123da08eaac72",
+                email: "francisohis@gmail.com",
+                amount: 25000000,
+                currency: "NGN",
+                ref:
+                    "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                /* metadata: {
+                  custom_fields: [
+                    {
+                      display_name: "Mobile Number",
+                      variable_name: "mobile_number",
+                      value: "+2348032592277",
+                    },
+                  ],
+                }, */
+                callback: function (response) {
+                    alert(
+                        "success. transaction ref is " +
+                        response.reference
+                    );
+                },
+                onClose: function () {
+                    alert("window closed");
+                },
+            });
+            handler.openIframe();
+        }
+</script>
+
+ 
+</body>
+
+</html>
+
+
+
+
+   <!-- <script>
         function makePayment() {
             var ama = document.getElementById("totalhid").value;
             FlutterwaveCheckout({
                 public_key: "FLWPUBK-efe729082a6c65a9e0b0da190d7b4434-X",
                 tx_ref: "" + Math.floor(Math.random() * 1000000000 + 1),
-                amount: ama,
+                amount: 50000000,
                 currency: "NGN",
                 country: "NG",
                 payment_options: " ",
@@ -46,42 +88,4 @@
                 },
             });
         }
-    </script>
-</body>
-
-</html>
-
-
-
-
-<script>
-    function payWithPaystack() {
-        var ama = document.getElementById("totalhid").value;
-        var handler = PaystackPop.setup({
-            key: "pk_live_45682a883c522ad36a17f49f955123da08eaac72",
-            email: "kennethobinna14@gmail.com",
-            amount: ama,
-            currency: "NGN",
-            ref:
-                "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-            /* metadata: {
-              custom_fields: [
-                {
-                  display_name: "Mobile Number",
-                  variable_name: "mobile_number",
-                  value: "+2348032592277",
-                },
-              ],
-            }, */
-            callback: function (response) {
-                alert(
-                    "success. transaction ref is " +
-                    response.reference
-                );
-            },
-            onClose: function () {
-                alert("window closed");
-            },
-        });
-        handler.openIframe();
-    }
+    </script> -->

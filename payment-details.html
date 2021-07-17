@@ -39,7 +39,7 @@
       var newFee = fee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
       if (fee != "") {
-        var total = parseInt(fee) + 350;
+        var total = parseInt(fee) + 500;
         var newTotal = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var hid = total;
         document.getElementById("cost").innerHTML = "=N=__________" + newFee + ":00";
@@ -139,7 +139,7 @@
                 <td>Amount:</td>
 
                 <td>
-                  <b><u id="cost">=N=__________444,500:00</u></b>
+                  <b><u id="cost">=N=__________444,000:00</u></b>
                 </td>
               </tr>
 
@@ -149,7 +149,7 @@
                 <td>Bank Charges:</td>
 
                 <td>
-                  <u><b>=N=____________350:00</b></u>
+                  <u><b>=N=____________500:00</b></u>
                 </td>
               </tr>
 
@@ -159,8 +159,8 @@
                 <td>Total:</td>
 
                 <td>
-                  <u><b id="total">=N=__________444,850:00</b></u>
-                  <input type="hidden" id="totalhid" value="444850">
+                  <u><b id="total">=N=__________444,500:00</b></u>
+                  <input type="hidden" id="totalhid" value="444500">
                 </td>
               </tr>
               <form name="form1" action="" method="post" enctype="multipart/form-data">
