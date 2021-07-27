@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    min-width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    color: #1C1C1C;
+    overflow-x: hidden;
+}
+
+a {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: #1C1C1C;
+}
+
+img {
+    min-width: 100%;
+}
+
+main {
+    .title {
+        background: url(../../assets/images/frame.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 277px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 2.4rem;
+            line-height: 3.6rem;
+            color: #000000;      
+        }
+    }
+
+    .content{
+        padding: 72px 300px;
+
+        .details {
+            width: 100%; 
+            margin-bottom: 50px;
+            .heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1em;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #BFBFBF; 
+                
+                h2 {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 1.25rem;
+                    line-height: 1.8rem;
+                    letter-spacing: 0.02em;
+                    color: #252525;
+                }
+
+                .toggle {
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    transform: rotate(180deg);
+                }
+            }
+
+            .body {
+                display: none;
+                p {
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 1.12rem;
+                    line-height: 1.9rem;
+                    letter-spacing: 0.02em;
+                    color: #252525;    
+                }
+            }
+            
+        }
+    }
+        
+}
+
+@media screen and (max-width: 1200px) {
+    main {
+        .content {
+            padding: 72px 90px;
+        }
+    }
+}
+
+@media screen and (max-width: 670px) {
+    main {
+        .content {
+            padding: 50px;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+
+    main {
+
+        .title {
+            padding: 10px;
+            h1 {
+                font-size: 1.8rem;
+                line-height: 3rem;
+                text-align: center;
+            }
+        }
+
+        .content {
+            padding: 4em 2em;
+
+            .details {
+                .heading {
+                    h2 {
+                        font-size: 1.12rem;
+                        line-height: 1.9rem;
+                    }
+                }
+
+                .body {
+                    font-size: 1rem;
+                    line-height: 1.7rem;
+                }
+            }
+        }
+    }
+}

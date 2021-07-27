@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  min-width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: #1C1C1C;
+  overflow-x: hidden;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: #1C1C1C;
+}
+
+img {
+  min-width: 100%;
+}
+
+main .title {
+  background: url(../../assets/images/frame.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 277px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .title h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  color: #000000;
+}
+
+main .wrapper {
+  padding: 64px 122px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: relative;
+}
+
+main .wrapper nav {
+  width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+main .wrapper nav ul {
+  list-style: none;
+}
+
+main .wrapper nav ul li {
+  margin-bottom: 8px;
+}
+
+main .wrapper nav a {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #000000;
+  outline: none;
+}
+
+main .wrapper nav .heading {
+  margin-top: 30px;
+}
+
+main .wrapper nav .heading a {
+  font-weight: 600;
+}
+
+main .wrapper nav .active {
+  background: #F2F8FF;
+  border-right: 4px solid #0B57A7;
+  padding: 10px;
+  width: 279px;
+}
+
+main .wrapper .content {
+  width: 70%;
+  margin-top: 1.5em;
+}
+
+main .wrapper .content section {
+  margin-bottom: 88px;
+}
+
+main .wrapper .content h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+main .wrapper .content h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.9rem;
+  color: #000000;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+main .wrapper .content p, main .wrapper .content ol {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1rem;
+  line-height: 2rem;
+  text-align: justify;
+  color: #000000;
+}
+
+main .wrapper .content ol li {
+  margin-left: 2em;
+}
+
+@media screen and (max-width: 1300px) {
+  main .wrapper {
+    padding: 64px 50px;
+  }
+  main .wrapper nav {
+    margin-right: 1.5em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  main .wrapper {
+    padding: 64px 100px;
+  }
+  main .wrapper nav {
+    display: none;
+  }
+  main .wrapper .content {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  main .wrapper {
+    padding: 2em 1em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main .title h1 {
+    font-size: 1.8rem;
+    line-height: 3rem;
+    text-align: center;
+  }
+  main .wrapper .content section {
+    margin-bottom: 40px;
+  }
+  main .wrapper .content h2 {
+    font-size: 1.25rem;
+  }
+  main .wrapper .content h3 {
+    font-size: 1.1rem;
+  }
+  main .wrapper .content p {
+    font-size: 1rem;
+  }
+}
+/*# sourceMappingURL=style.css.map */

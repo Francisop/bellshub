@@ -1,0 +1,604 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  min-width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: #1C1C1C;
+  overflow-x: hidden;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: #1C1C1C;
+}
+
+img {
+  width: 100%;
+}
+
+.hero {
+  padding: 2em 2.2em;
+  width: 100%;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero .hero-text {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 4em;
+}
+
+.hero .hero-text h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  text-align: center;
+  color: #0B57A7;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.hero .hero-text p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.hero .hero-text .play-google {
+  margin-top: 1em;
+  width: 180px;
+  height: 55px;
+  cursor: pointer;
+}
+
+.hero .hero-text .play-google:hover {
+  -webkit-transform: scale(1.1) !important;
+          transform: scale(1.1) !important;
+}
+
+.hero .hero-text .circle {
+  position: absolute;
+  width: 27px;
+  height: 29px;
+  top: 3.5%;
+  right: 20%;
+  background: url(../../assets/images/circle-mobile.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hero .hero-text .circle.animated {
+  -webkit-animation-duration: 8s;
+          animation-duration: 8s;
+}
+
+.hero .hero-text .triangle.animated {
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+}
+
+.hero .hero-text .triangle {
+  position: absolute;
+  width: 45px;
+  height: 32px;
+  right: 10%;
+  top: 41%;
+  background: url(../../assets/images/triangle-mobile.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 20;
+}
+
+.hero .hero-img {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hero .hero-img .hero-app-screen {
+  width: 273px;
+  height: 425px;
+  background: url(../../assets/images/app-screen-mobile.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.showcase {
+  width: 100%;
+  overflow: hidden;
+  background: #F2F8FF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2em 2em 0 2em;
+}
+
+.showcase .showcase-text p {
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.showcase .showcase-img {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.showcase .showcase-img .showcase-app-screen {
+  width: 424px;
+  height: 250.48px;
+  background: url(../../assets/images/showcase-app-screen-mobile.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.benefits {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1.5em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.benefits .benefits-heading {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.benefits .benefits-heading h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 2.7rem;
+  color: #0B57A7;
+}
+
+.benefits .benefit-col-1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.benefits .benefit-col-2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.benefits .benefit-box {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 1em;
+}
+
+.benefits .benefit-box .icon {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 15px;
+}
+
+.benefits .benefit-box .icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.benefits .benefit-box h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.benefits .benefit-box p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+}
+
+.download {
+  background: #0050A7;
+  width: 100%;
+  padding: 2.5em 1.5em 0 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.download .download-text {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.download .download-text h2 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: #fff;
+}
+
+.download .download-text p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #D1E7FF;
+  margin-top: 0.8em;
+}
+
+.download .download-text .play-google {
+  margin: 2em 0;
+  width: 180px;
+  height: 55px;
+  cursor: pointer;
+}
+
+.download .download-text .play-google:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.download .download-img {
+  width: 100%;
+  margin: 2em auto 0 auto;
+}
+
+.download .download-img .download-screen-img {
+  width: 312px;
+  height: 268px;
+  background: url(../../assets/images/download-screen-img-mobile.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 250px) and (max-width: 270px) {
+  .download {
+    overflow: hidden;
+  }
+  .download .download-img .download-screen-img {
+    width: 180px;
+  }
+}
+
+@media screen and (min-width: 250px) and (max-width: 350px) {
+  .hero {
+    padding: 2em 1.8em;
+  }
+  .showcase {
+    padding: 2em 0.5em 0 0.5em;
+  }
+  .download {
+    padding: 2.5em 0.5em 0 0.5em;
+  }
+  .download .download-img .download-screen-img {
+    width: 290px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 650px) {
+  .hero {
+    padding: 2em 4em;
+  }
+  .showcase {
+    padding: 2.5em 5em 0 5em;
+  }
+  .benefits {
+    padding: 2.5em;
+  }
+  .download {
+    padding: 2.5em 3.5em 0 3.5em;
+  }
+}
+
+@media screen and (min-width: 651px) {
+  .hero {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .hero .hero-text {
+    width: 50%;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .hero .hero-text h1 {
+    text-align: justify;
+  }
+  .hero .hero-text p {
+    text-align: justify;
+  }
+  .hero .hero-text .circle {
+    right: 40%;
+    top: 6.5%;
+  }
+  .hero .hero-text .triangle {
+    right: 50%;
+    top: 50%;
+  }
+  .hero .hero-img {
+    width: 50%;
+  }
+  .showcase {
+    padding: 5em 5em 0 5em;
+  }
+  .showcase .showcase-text p {
+    width: 636px;
+    height: 120px;
+  }
+  .benefits {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .benefits .benefits-heading h2 {
+    text-align: center;
+    margin: 1em 0;
+  }
+  .benefits .benefit-col-1 {
+    width: 45%;
+    margin-right: 1em;
+  }
+  .benefits .benefit-col-2 {
+    width: 45%;
+  }
+  .download .download-text {
+    width: 50%;
+  }
+  .download .download-img {
+    width: 50%;
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .hero {
+    padding: 2em 8em;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .header {
+    padding: 1em 5em;
+  }
+  .hero {
+    padding: 2em 8em;
+  }
+  .hero .hero-text {
+    width: 450px;
+  }
+  .hero .hero-text h1 {
+    font-size: 3.2rem;
+    line-height: 3.5rem;
+  }
+  .hero .hero-text p {
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+  }
+  .hero .hero-text .circle {
+    width: 55px;
+    height: 60px;
+    right: 52%;
+    top: 4.5%;
+    background: url(../../assets/images/circle.png);
+  }
+  .hero .hero-text .triangle {
+    width: 73px;
+    height: 60px;
+    right: 65%;
+    top: 57%;
+    background: url(../../assets/images/triangle.png);
+  }
+  .hero .hero-text .play-google {
+    width: 240px;
+    height: 75px;
+  }
+  .hero .hero-img .hero-app-screen {
+    width: 386px;
+    height: 623px;
+    background: url(../../assets/images/app-screen-desktop.png);
+  }
+  .showcase .showcase-text p {
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    width: 636px;
+    height: 120px;
+  }
+  .showcase .showcase-img .showcase-app-screen {
+    width: 825.19px;
+    height: 472.55px;
+    background: url(../../assets/images/showcase-app-screen-desktop.png);
+  }
+  .benefits {
+    padding: 1.5em 10em;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .benefits h2 {
+    font-size: 2.4rem;
+    line-height: 3.1rem;
+    text-align: center;
+    margin: 2em 0;
+  }
+  .benefits .benefit-box {
+    margin-bottom: 3em;
+  }
+  .benefits .benefit-box .icon {
+    min-width: 60px;
+    min-height: 60px;
+  }
+  .benefits .benefit-box h3 {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+  }
+  .benefits .benefit-box p {
+    width: 276px;
+    font-size: 1.1rem;
+    line-height: 1.7rem;
+  }
+  .download {
+    padding: 2.5em 3.5em 0 3.5em;
+  }
+  .download .download-text h2 {
+    font-size: 3rem;
+    line-height: 3.7rem;
+    width: 530px;
+  }
+  .download .download-text p {
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+  }
+  .download .download-text .play-google {
+    width: 240px;
+    height: 75px;
+  }
+  .download .download-img .download-screen-img {
+    background: url(../../assets/images/download-screen-img-desktop.png);
+    width: 574px;
+    height: 494px;
+  }
+}
+/*# sourceMappingURL=style.css.map */
