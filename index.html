@@ -47,10 +47,43 @@
             <h3 class="new">Spicy Tv</h3>
           </a>
 
+
+
+
+
+
+
+          <div style="margin: 10%;">
+            <!-- AUDIO -->
+            <audio id="demo" autoplay>
+              <source src="song1.mp3" type="audio/mpeg">
+            </audio>
+            <!-- end  AUDIO -->
+            <div class="row" style="background: black;">
+              <img src="funradio.png" alt="funradio" width="100" height="100">
+              <img id="pause" onclick="togglePlay('pause')" src="pause-button.png" style=" cursor: pointer;" height="60"
+                width="60" alt="">
+              <img id="play" onclick="togglePlay('play')" src="play-button.png" style=" display: none; cursor: pointer;"
+                height="60" width="60" alt="">
+              <img src="speaker.png" alt="speaker" style="padding-left: 4px;" width="60" height="60">
+            </div>
+            <p style=" padding: 0; margin: 0; color: white;">Omah lay - understand <span><i class="fa fa-caret-down"
+                  style="cursor: pointer;" onclick="opac()" id="caret-down" aria-hidden="true"></i></span></p>
+          </div>
+
+
+
+
           <!-- Navbar Toggler -->
           <div class="classy-navbar-toggler new">
             <span class="navbarToggler new"><span></span><span></span><span></span></span>
           </div>
+
+
+
+
+
+
 
           <!-- Menu -->
           <div class="classy-menu">
@@ -59,63 +92,47 @@
               <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
             </div>
 
+
+
+
+
             <!-- Nav Start -->
             <div class="classynav">
               <ul id="nav">
-                <!-- <li class="current-item new"><a href="./index.html">Home</a></li> -->
-                <!-- <li><a class="text-white" href="#">Pages</a>
-                  <ul class="dropdown">
-                    <li class="new" ><a class="text-white" href="./index.html">- Home</a></li>
-                    <li><a href="./about.html">- About Us</a></li>
-                    <li><a href="./projects.html">- Projects</a></li>
-                    <li><a href="./models.html">- Models</a></li>
-                    <li><a href="./casting.html">- Casting</a></li>
-                    <li><a href="./blog.html">- Blog</a></li>
-                    <li><a href="./single-blog.html">- Blog Details</a></li>
-                    <li><a href="./contact.html">- Contact</a></li>
-                    <li><a class="text-white" href="#">- Dropdown</a>
-                      <ul class="dropdown">
-                        <li><a href="#">- Dropdown Item</a></li>
-                        <li><a href="#">- Dropdown Item</a>
-                          <ul class="dropdown">
-                            <li><a href="#">- Even Dropdown</a></li>
-                            <li><a href="#">- Even Dropdown</a></li>
-                            <li><a href="#">- Even Dropdown</a></li>
-                            <li><a href="#">- Even Dropdown</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">- Dropdown Item</a></li>
-                        <li><a href="#">- Dropdown Item</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li> -->
-                <!-- <li><a class="text-white" href="./projects.html">Project</a></li>
-                <li><a class="text-white" href="./models.html">Models</a></li>
-                <li><a class="text-white" href="./casting.html">Casting</a></li> -->
+                <li>
+                  <div class="text-white" href="#"></div>
+                </li>
                 <li> <a href="#" class="btn mona-btn text-white">Login</a></li>
                 <li><a class="text-white" href="#">Register</a></li>
-                <!-- <li><a class="text-white" href="#">Blog</a> -->
-                <!-- <ul class="dropdown">
-                    <li><a class="text-white" href="./blog.html">- Blog</a></li>
-                    <li><a class="text-white" href="./single-blog.html">- Blog Details</a></li>
-                  </ul> -->
-                </li>
-                <li><a class="text-white" href="#">Contact</a></li>
+
               </ul>
 
-              <!-- Search Icon -->
-              <!-- <div class="search-icon" data-toggle="modal" data-target="#searchModal">
-                <i class="icon_search"></i>
-              </div> -->
+
             </div>
-            <!-- Nav End -->
+
 
           </div>
         </nav>
       </div>
     </div>
+    <div id="show-song" style="height:calc(100vh);  overflow: hidden; width: 100vw; position: absolute; background:white; z-index: 10000; display: none;  background-color: red; /* For browsers that do not support gradients */
+     background-image:linear-gradient(#D3112B, black);">
+      <div class="row">
+        <div class="col-8" style="padding-left: 20px; background-color: black;">
+          <img id="song-img" style=" margin: auto; opacity: 0.3; height:70%; width: 100%;" src="./img/bg-img/17.jpg">
+          <p style="color: aliceblue;">Understand - Omah Lay</p>
+        </div>
+        <div class="col-4" style="padding: 50px; color: white; background-color: #D3112B">
+          <h2 style="color: white;" >Omah Lay</h2>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus minus nobis dicta laudantium. Fugiat inventore, velit dolorum labore atque accusantium, in dolores id aut ea deleniti asperiores quasi repellendus doloribus itaque reiciendis dolor, magni officia? Excepturi asperiores perspiciatis, vel saepe natus aliquam maiores dolor autem obcaecati, architecto eius placeat voluptatem animi aut tenetur! Ea maxime, adipisci nostrum dolorem, consequatur fuga iste nihil cumque reiciendis dicta nemo accusantium assumenda a odit atque molestias sapiente obcaecati nulla soluta quo ex? Nostrum quo voluptatibus error repellat non illum itaque dolor, asperiores iste. Odit corrupti dolores vel id impedit nesciunt culpa asperiores ex? Animi.
+        </div>
+      </div>
+
+    </div>
+
+    </div>
   </header>
+
   <!-- ***** Header Area End ***** -->
 
   <!-- ***** Top Search Area Start ***** -->
@@ -159,7 +176,8 @@
               <div class="welcome-text">
                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">FIREBOY DML</h2>
                 <h5 data-animation="bounceInUp" data-delay="600ms">APOLLO 2020</h5>
-                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i class="arrow_right"></i></a>
+                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i
+                    class="arrow_right"></i></a>
               </div>
             </div>
           </div>
@@ -191,7 +209,8 @@
               <div class="welcome-text">
                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">WIZKID</h2>
                 <h5 data-animation="bounceInUp" data-delay="600ms" class="text-white">Made In Lagos 2020</h5>
-                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i class="arrow_right"></i></a>
+                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i
+                    class="arrow_right"></i></a>
               </div>
             </div>
           </div>
@@ -223,7 +242,8 @@
               <div class="welcome-text">
                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">TEMS</h2>
                 <h5 data-animation="bounceInUp" data-delay="600ms" class="text-white">For Broken Ears 2020, EP</h5>
-                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i class="arrow_right"></i></a>
+                <a href="#" class="btn bg-white" data-animation="bounceInUp" data-delay="800ms">More Details <i
+                    class="arrow_right"></i></a>
               </div>
             </div>
           </div>
@@ -1878,6 +1898,66 @@
     <script src="js/mona.bundle.js"></script>
     <!-- Active js -->
     <script src="js/default-assets/active.js"></script>
+
+
+    <Script>
+
+
+
+
+
+
+
+      function opac() {
+        setInterval(imgFunc, 3000);
+      }
+
+
+      function imgFunc() {
+        var simg = document.getElementById('song-img');
+
+        if (simg.style.opacity === 0.2) {
+          simg.style.opacity = 0;
+        }
+        if (simg.style.opacity === 0) {
+          simg.style.opacity = 0.2;
+        }
+      }
+
+
+
+      function togglePlay(state) {
+        var audio = document.getElementById('demo');
+        var play = document.getElementById('play');
+        var pause = document.getElementById('pause');
+
+        if (state == 'play') {
+          audio.play();
+          play.style.display = 'none';
+          pause.style.display = 'block';
+        } else {
+          audio.pause();
+          play.style.display = 'block';
+          pause.style.display = 'none';
+        }
+      }
+
+
+      $(document).ready(function () {
+        $("#caret-down").click(function () {
+          opac();
+          $("#show-song").toggle("slow", function () {
+            // Animation complete.
+          });
+        });
+
+      });
+
+
+
+
+
+    </Script>
 
 </body>
 
