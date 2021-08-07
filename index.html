@@ -55,17 +55,16 @@
 
           <div style="margin: 10%;">
             <!-- AUDIO -->
-            <audio id="demo" autoplay>
+            <audio id="demo">
               <source src="song1.mp3" type="audio/mpeg">
             </audio>
             <!-- end  AUDIO -->
             <div class="row" style="background: black;">
-              <img src="funradio.png" alt="funradio" width="100" height="100">
-              <img id="pause" onclick="togglePlay('pause')" src="pause-button.png"  style="display: none; cursor: pointer;" height="60"
-                width="60" alt="">
-              <img id="play" onclick="togglePlay('play')" src="play-button.png" style="  cursor: pointer;"
-                height="60" width="60" alt="">
-              <img src="speaker.png" alt="speaker" style="padding-left: 4px;" width="60" height="60">
+              <img src="funradio.png"  data-toggle="modal" data-target="#modelId" alt="funradio" style="cursor: pointer;"  width="100" height="100">
+              <img id="pause" onclick="togglePlay('pause')" src="pause-button.png"
+                style="display: none; cursor: pointer; width: 40px; height: 40px; margin-top: 6%;" alt="">
+              <img id="play" onclick="togglePlay('play')" src="play-button.png" style="  cursor: pointer; width: 40px; height: 40px; margin-top: 6%;"  alt="">
+              <img src="speaker.png" alt="speaker" style="padding-left: 4px;width: 40px; height: 40px; margin-top: 6%;">
             </div>
             <p style=" padding: 0; margin: 0; color: white;">Omah lay - understand <span><i class="fa fa-caret-down"
                   style="cursor: pointer;" onclick="opac()" id="caret-down" aria-hidden="true"></i></span></p>
@@ -115,6 +114,7 @@
         </nav>
       </div>
     </div>
+    <!-- break -->
     <div id="show-song" style="height:calc(100vh);  overflow: hidden; width: 100vw; position: absolute; background:white; z-index: 10000; display: none;  background-color: red; /* For browsers that do not support gradients */
      background-image:linear-gradient(#D3112B, black);">
       <div class="row">
@@ -123,14 +123,28 @@
           <p style="color: aliceblue;">Understand - Omah Lay</p>
         </div>
         <div class="col-4" style="padding: 50px; color: white; background-color: #D3112B">
-          <h2 style="color: white;" >Omah Lay</h2>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus minus nobis dicta laudantium. Fugiat inventore, velit dolorum labore atque accusantium, in dolores id aut ea deleniti asperiores quasi repellendus doloribus itaque reiciendis dolor, magni officia? Excepturi asperiores perspiciatis, vel saepe natus aliquam maiores dolor autem obcaecati, architecto eius placeat voluptatem animi aut tenetur! Ea maxime, adipisci nostrum dolorem, consequatur fuga iste nihil cumque reiciendis dicta nemo accusantium assumenda a odit atque molestias sapiente obcaecati nulla soluta quo ex? Nostrum quo voluptatibus error repellat non illum itaque dolor, asperiores iste. Odit corrupti dolores vel id impedit nesciunt culpa asperiores ex? Animi.
+          <h2 style="color: white;">Omah Lay</h2>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus minus nobis dicta laudantium. Fugiat
+          inventore, velit dolorum labore atque accusantium, in dolores id aut ea deleniti asperiores quasi repellendus
+          doloribus itaque reiciendis dolor, magni officia? Excepturi asperiores perspiciatis, vel saepe natus aliquam
+          maiores dolor autem obcaecati, architecto eius placeat voluptatem animi aut tenetur! Ea maxime, adipisci
+          nostrum dolorem, consequatur fuga iste nihil cumque reiciendis dicta nemo accusantium assumenda a odit atque
+          molestias sapiente obcaecati nulla soluta quo ex? Nostrum quo voluptatibus error repellat non illum itaque
+          dolor, asperiores iste. Odit corrupti dolores vel id impedit nesciunt culpa asperiores ex? Animi.
         </div>
       </div>
 
     </div>
-
+    <!-- Button trigger modal -->
     </div>
+    <!-- break  -->
+
+
+
+    
+  
+
+   
   </header>
 
   <!-- ***** Header Area End ***** -->
@@ -159,6 +173,70 @@
 
   <!-- ***** Welcome Area Start ***** -->
   <section class="welcome-area">
+
+<style>
+  .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  min-width: 100vw;
+  border-radius: 0;
+}
+
+</style>
+  <!-- Modal -->
+  <div class="modal fade"  id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="background-color: black">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="font-size: 70px; color: white;">&times;</span>
+        </button>
+        <div class="modal-body row" style="background-color: black;">
+
+
+          <div class="col-6">
+            <img src="funradio.png" alt="funradio" style="width: 100%; padding: 0; margin: 0;">
+            </div>
+      
+          <div class="col-6" >
+            <div style="margin-left: 10%; margin-top: 10%;">
+            <div>
+              <img id="song-img" style=" border-radius: 20px; opacity: 0.3; min-height:0%; width: 70%;" src="./img/bg-img/17.jpg">
+              <br>
+               <p style="color: aliceblue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Understand - Omah Lay</p>
+            </div>
+            <div style="display: flex;">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div style="height: 90%; width: 90%; margin-top:0.3%; margin-left: 1%;">
+                <img id="pause" onclick="togglePlay('pause')" src="pause-button.png"
+                  style="cursor: pointer;  height:13%; width: 13%; padding-left: 8px;" alt="">
+    
+                <img id="play" onclick="togglePlay('play')" src="play-button.png"
+                  style="  cursor: pointer; height:13%; width: 13%; padding-left: 8px;" alt="">
+    
+                <img src="speaker.png" alt="speaker" style="padding-left: 8px; height:13%; width:13%;">
+              </div>
+          </div>
+        </div>
+
+
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
     <!-- Welcome Slides -->
     <div class="welcome-slides owl-carousel">
 
